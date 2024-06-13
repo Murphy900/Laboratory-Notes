@@ -3,25 +3,25 @@
   	
   	\section{Probabilit\`{a} per variabili aleatorie in pi\`{u} \\ dimensioni}
   	
-  	Quando un evento \`{e} identificato da un vettore $\underline{x}$, si parla di di distribuzioni di probabilit\`{a} multidimensionali.  Per cui risultano verificati gli assiomi di Kolgomorov.
+  	Quando un evento \`{e} identificato da un vettore $\underline{x}$, si parla di di distribuzioni di probabilit\`{a} multidimensionali o \textbf{joint pdf (probabilt\`{a} congiunta)}.  
   	
   	\begin{equation*}
-  		f(\underline{x}): \mathbb{R}^n \rightarrow \mathbb{R}^+
+  		pdf(\underline{x}): A \subseteq \mathbb{R}^n \rightarrow \mathbb{R}^+
   	\end{equation*}
   	
   	e la cdf per estensione della definizione mono-dimensionale \`{e}:
   	
 	\begin{equation*}
-  		cdf(\underline{x}) = \int_{-\infty}^{\underline{x}}f(\underline{x}) \cdot d\underline{x}
+  		cdf(\underline{x}) = \int_{A}pdf(\underline{x}) \cdot d\underline{x}
 	\end{equation*}
   	
   	
-	la porbabili\`{a} di un evento per una variabile continua $\underline{x}$ \`{e} definita su una regione di spazio $A \subseteq \mathbb{R}^n$:
+	la probabili\`{a} di un evento per una variabile continua $\underline{x}$ \`{e} definita su una regione di spazio $A \subseteq \mathbb{R}^n$:
   	
 	\vspace{0.2in}
   \begin{minipage}{0.5\textwidth}
 		\begin{equation*}
-  			P(\underline{x} \in A) = \int_{A}f(\underline{x}) \cdot d\underline{x}
+  			P(\underline{x} \in A) = \int_{A}pdff(\underline{x}) \cdot d\underline{x}
   		\end{equation*}
   \end{minipage}
   \begin{minipage}{.4\textwidth}
@@ -31,7 +31,7 @@
   \end{minipage}
 	\vspace{0.2in}
 
-
+Tale definizione di probabilit\`{a} verifica gli assiomi di Kolgomorov.
 	
 \section{Distribuzione di probabilit\`{a} marginale}
 
@@ -50,6 +50,13 @@ Data una distribuzione di probabilit\`{a} multidimensionale pdf($x_1,\cdots x_n)
 \caption{Distribuzione di probabilit\`{a} marginale per una pdf(x,y)}
 \end{figure}
 
+\subsubsection{Esempio}
+
+Nel caso bi-dimensionale si ha che le rispettive distribuzioni marginali di una joint pdf$(x_1,x_2)$ sono date da:
+
+\begin{equation}
+	f_x(y) = \int pdf(x,y)dy \quad  \quad f_y(x) = \int pdf(x,y)dx
+\end{equation}
 
 
 \section{Distribuzione di probabilit\`{a} condizionata}
@@ -70,11 +77,27 @@ Di conseguenza possiamo scrivere la probabilit\`{a} condizionata come:
 	pdf(x \vert y = y_0) = P(A\vert B) = \dfrac{P(A \cap B)}{P(B)} = \dfrac{pdf(x,y_0)}{fx(y_0)}
 \end{equation}
 
-\noindent Tale risultato ci riconduce al fatto che le componenti di $\underline{x}$ possono essere statisticamente indipendenti tra di loro e dunque nel caso lo fossero possiamo riscrivere la $pdf(\underline{x})$ come:
+e analogamente:
 
 \begin{equation}
-	pdf(x_1,x_2,\cdots,x_n) = pdf(x_1)\cdot pdf(x_2) \cdots pdf(x_n)
+	pdf(y \vert x = x_0) = \dfrac{pdf(x_0,y)}{f_y(x_0)}
 \end{equation}
+
+\section{Valore di aspettazione di una joint pdf}
+
+Per una distribuzione di probabilit\`{a} congiunta abbiamo che il valore di aspettazione \`{e} definito da un vettore:
+\begin{align}
+E[\underline{x}] =
+	\begin{bmatrix}
+		\mu_x \\
+		\mu_y \\
+	\end{bmatrix}
+	= 
+	\begin{bmatrix}
+		\int \int x \cdot pdf(x,y)dxdy \\
+		\int \int y \cdot pdf(x,y)dxdy \\
+	\end{bmatrix}	
+\end{align}
 
 
 
@@ -83,7 +106,7 @@ Di conseguenza possiamo scrivere la probabilit\`{a} condizionata come:
 Nel caso della Varianza, le componenti di una variabile aleatoria multidimensionale $\underline{x}$ possono essere legate tra loro, ovvero avere una relazione nel modo in cui variano, tale legame prende il nome di \textbf{covarianza}. Per due componenti $x_i$ e $x_j$ con $i \neq j$ si ha che: 
 
 \begin{equation}
-	\sigma_{i,j}^2= E[(x_i - \mu_i)]E[(x_j - \mu_j)] = E[(x_i - \mu_i)(x_j - \mu_j)]
+	\sigma_{i,j}^2 = E[(x_i - \mu_i)(x_j - \mu_j)] = E[x_ix_j] - E[x_i]E[x_j]
 \end{equation}  	
 
 \noindent mentre   	
@@ -92,7 +115,7 @@ Nel caso della Varianza, le componenti di una variabile aleatoria multidimension
 	\sigma_{i,i}^2 = E[(x_i-\mu_i)^2]
 \end{equation}
  
-\noindent di conseguenza la varianza di una pdf($\underline{x})$ multidimensionale \`{e} rappresentata da una matrice che prende il nome di \textbf{matrice di covarianza} ed ha dimensione $n \times n$ nel caso $\underline{x}$ abbiamo dimensione n.
+\noindent di conseguenza la varianza di una pdf($\underline{x})$ multidimensionale \`{e} rappresentata da una matrice che prende il nome di \textbf{matrice di covarianza} ed ha dimensione $n \times n$ nel caso $\underline{x}$ sia un vettore dimensione n.
 
 \begin{equation}
 	V[\underline{x}] = \begin{bmatrix}
@@ -119,6 +142,7 @@ La covarianza gode delle seguenti propriet\`{a}:
 	\item Avere $Cov[x_i,x_j] = 0 $ non implica necessariamente che le due variabili aleatorie siano statisticamente indipendenti.
 	\item Se due variabili aleatorie sono statisticamente indipendenti \\ $\Rightarrow Cov[x_i,x_j] = 0 $
 	\item Se due variabili aleatorie sono linearmente dipendenti \\$\Rightarrow Cov[x_i,x_j] = 0 $
+	\item  La matrice di covarianza \`{e} simmetrica $\Rightarrow$ \`{e} diagonalizzabile.
 \end{itemize}
  
  
@@ -145,7 +169,30 @@ tale grandezza $\rho_{ij} \in [-1,1]$.
 \caption{Indice di correlazione di Pearson per un campione di misure.}
 \end{figure} 
 
-\subsection{Cambiamento di variabili per una pdf \\ multidimensionale}
+\section{Variabili Statisticamente indipendenti}
+Applichiamo la definizione di probabilit\`{a} congiunta data dall'equazione (3.3), poich\`{e} per ipotizziamo che  $P(x_2 \vert x_1)$ e $x_2$ non dipenda da $x_1$ avremo che:
+\begin{equation*}
+pdf(x_2 \vert x_1) = \dfrac{pdf(x_1,x_2)}{f_{x_1}} \Rightarrow pdf((x_1,x_2) = f_{x_1} \cdot pdf(x_2 \vert x_1)
+\end{equation*}
+si ha che  
+\begin{equation*}
+\quad f_{x_2}(x_1) = \int pdf(x_1,x_2)dx_1 = pdf(x_2\vert x_1) \int f_{x_1}dx_{1} = pdf (x_2 \vert x_1)
+\end{equation*}
+dunque si ha che:
+\begin{equation*}
+	pdf(x_1,x_2) = f_{x_1} \cdot f_{x_2}
+\end{equation*}
+
+\subsubsection{Definizione d'indipendenza}
+Due variabili aleatorie $x_1$ ed $x_2$ descritte da una joint pdf($x_1,x_2)$ si definiscono \textbf{indipendenti} $\iff$ la joint pdf($x_1,x_2)$ = $pdf(x_1) \cdot pdf(x_2)$ dove $ pdf(x_1)$ e $pdf(x_2)$ coincidono con le marginali.
+
+\subsubsection{Teorema}
+Due variabili aleatorie $x_1$ ed $x_2$ descritte da una joint pdf($x_1,x_2)$ sono indipendenti $\Rightarrow$ la covarianza pu\`{o} essere scritta come:
+\begin{equation}
+	E[(x_1-\mu_{x_1})(x_2 - \mu_{x_2})] = E[(x_1-\mu_{x_1})] \cdot E[(x_2 - \mu_{x_2})]
+\end{equation}
+ 
+\section{Cambiamento di variabili per una pdf \\ multidimensionale}
 
 La matrice della varianza (3.6) \`{e} diagonalizzabile, questo vuol dire che esiste un cambio di base che la diagonalizza, in fisica \`{e} equivalente ad avere un cambio di variabile. Sperimentalmente raccolto un campione di misure esiste sempre un cambio di variabile tale per cui la matrice di covarianza \`{e} diagonalizzabile. Anche se con un cambio di variabili le grandezze diventano decorrelate $Cov[x_i,x_j] = 0$ questo non vuol dire che siano statisticamente indipendenti.
 
@@ -180,15 +227,18 @@ Ipotizziamo di avere un insieme di N misure $\{x_i\}_i^N$ e usiamo tali valori c
 	\item $\sigma_y^2 = E[y^2] - E[y]^2 = E[ (\underline{x} - \underline{\mu})^T H(u(\underline{x}))\big \vert_{x = \mu}(\underline{x} - \underline{\mu})] = \\ \\ =\sum_{i,j =1}^n \dfrac{\partial u(\underline{x})}{\partial x_i} \cdot \dfrac{\partial u(\underline{x})}{\partial x_j}\Big \vert_{x = \mu} \cdot V_{ij}$
 \end{itemize}
 \vspace{0.1in}
-\noindent Per un caso bidimensionale l'incertezza su y = f(x,y) \`{e} data da:
+\noindent Per un caso bidimensionale l'incertezza su z = f(x,y) \`{e} data da:
 \vspace{0.05in}
 \begin{equation}
-	\sigma_{y}^2 = \Big (\dfrac{\partial f(x,y)}{\partial x}\Big)^2  \sigma_x^2 + \Big (\dfrac{\partial f(x,y)}{\partial y}\Big)^2  \sigma_y^2 + 2 \dfrac{\partial f(x,y)}{\partial x} \cdot \dfrac{\partial f(x,y)}{\partial y} Cov[x,y]
+	\sigma_{z}^2 = \Big (\dfrac{\partial f(x,y)}{\partial x}\Big)^2 \Big \vert_{x =\mu}  \sigma_x^2 + \Big (\dfrac{\partial f(x,y)}{\partial y}\Big)^2\Big \vert_{x =\mu}  \sigma_y^2 + 2 \dfrac{\partial f(x,y)}{\partial x} \cdot \dfrac{\partial f(x,y)}{\partial y}\Big \vert_{x =\mu} Cov[x,y]
 \end{equation}
 \newpage
 
-\section{Distribuzione di Gauss Multidimensionale}
+\subsection{Decorrelazione delle variabili}
 
+Consideriamo un vettore $\underline{x}$ le cui componenti sono variabili aleatorie dipendenti tra loro. Poich\`{e} la matrice di covarianza \`{e} simmetrica possiamo definire una matrice $U$ che la diagonalizza $D[\underline{y}] = U^T V[\underline{x}]U$, tale matrice definisce un cambio di coordinate $\underline{y} = U\underline{x}$ dove le componenti di $\underline{y}$ risultano essere decorrelate tra loro.
+
+\section{Distribuzione di Gauss Multidimensionale}
 
 L'espressione di una Gaussiana in pi\`{u} dimensioni \`{e} data da:
 
@@ -227,7 +277,9 @@ Se il coefficiente di correlazione di Pearson $\rho = 0$ possiamo riscrivere l'e
 	& f(x,y \; \big \vert \; \mu_x,\mu_y,V) = \dfrac{1}{(2\pi)\sigma_x \sigma_y} \exp{\Big \{ - \dfrac{1}{2} \Big[\Big ( \dfrac{x-\mu_x}{\sigma_x} \Big)^2 + \Big (\dfrac{y-\mu_y}{\sigma_y} \Big)^2 \Big] \Big \}} = 
 	\\
 	\\
-	&\phantom{b= --------}= G(x,\mu_x,\sigma_x) \cdot G(y,\my_y,\sigma_y)
+	&\phantom{b= --------}= G(x,\mu_x,\sigma_x) \cdot G(y,\mu_y,\sigma_y)
 \end{align*}
 \newline
 In generale \`{e} solo vero che due variabili statisticamente indipendenti sono anche decorrelate, nel caso Gaussiano vale anche il viceversa, ovvero se due variabili sono decorrelate allora sono anche statisticamente indipendenti.
+
+
