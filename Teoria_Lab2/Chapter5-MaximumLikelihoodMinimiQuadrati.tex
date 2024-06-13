@@ -586,7 +586,6 @@ I termini in $\colorbox{cyan}{\phantom{b = \,}}$ viene definito \textbf{dispersi
 Pi\`{u} $x_0$ si allontana da $\overline{x}$ pi\`{u} \`{e} grande la varianza su $y_0$.
 
 \section{Fit d'istogrammi}
-
 \begin{wrapfigure}{l}{0.\textwidth}
 \centering
 \includegraphics[scale = 0.34]{BinnedData}	
@@ -600,7 +599,7 @@ Consideriamo un insieme di N misure $\{x_{i}\}_i^N$ IID che seguono la pdf $f(x_
 \centering
 \includegraphics[scale = 0.32]{expbin}	
 \end{wrapfigure}
-\noindent Partendo dalla probabilit\`{a} associata a ciascun bin $\omega_j$ costruiamo un istogramma i cui conteggi attesi sono dati da i $ E[n_{j}] = N \cdot p_j(\vec{\theta})$. Le misure di conteggio dell'istogramma definito dai dati del campione seguono una joint-pdf $pdf(n_1,...,n_k,p_1,...p_k)$ che definisce una distribuzione multinomiale. Per $p \rightarrow 0 $ le misure di conteggio sono statisticamente indipendenti tra loro di conseguenza la multinomiale pu\`{o} essere riscritta come prodotto di distribuzioni di probabilit\`{a} binomiali.
+Partendo dalla probabilit\`{a} associata a ciascun bin $\omega_j$ costruiamo un istogramma i cui conteggi attesi sono dati da $ E[n_{j}] = N \cdot p_j(\vec{\theta})$. Le misure di conteggio dell'istogramma definito dai dati del campione seguono una joint-pdf $pdf(n_1,...,n_k,p_1,...p_k)$ che definisce una distribuzione multinomiale. Per $p \rightarrow 0 $ le misure di conteggio sono statisticamente indipendenti tra loro di conseguenza la multinomiale pu\`{o} essere riscritta come prodotto di distribuzioni di probabilit\`{a} binomiali.
 \begin{equation*}
 	pdf(n_1,...,n_k,p_1,...,p_k) = \prod_{i=1}^kpdf(n_i,p_i)
 \end{equation*}
@@ -610,7 +609,6 @@ Nel caso in cui il valore di aspettano del conteggio dei bin sia costante possia
 \end{equation*}
 Che coincide con la extended likelihood.\newline
 Non solo si conosce la pdf associata ai dati ma anche il loro valore di aspettazione e varianza di conseguenza \`{e} possibile applicare il metodo di ML e dei MQ.
-
 \subsubsection{Osservazioni}
 
 Utilizzare le misure binnate ci permette di ridurre le dimensioni dei dati con cui si lavora, anche se si ha una perdita d'informazione questa viene bilanciata da una maggiore semplicit\`{a} e dalla possibilit\`{a} di usare differenti tecniche per la stima dei parametri, come per esempio quella di ML che per campioni molto grandi risulta essere da un punto di vista computazionale dispendiosa.
@@ -629,7 +627,7 @@ Assumendo che i conteggi $n_i$ seguano una pdf Poiss$(n_i,\mu_i)$ (la discussion
 \begin{equation}
 	\chi^2_{Neyman} = \sum_{i=1}^N\dfrac{(n_i - \mu_i(\vec{\theta})^2)}{n_i} = \sum_{i=1}^N\dfrac{(O_i - E_i)^2}{O_i}
 \end{equation} 
-Dove per $n_i$ grande si \`{e} approssima $V[n_i] \approx n_i$. La necessit\`{a} di approssimare i dati a una Gaussiana e la varianza al numero di conteggi di un bin, \`{e} determinata dal fatto che cos\`{i} facendo il teorema di Gauss-Markov risulta soddisfatto poich\`{e} tra le ipotesi \`{e} necessario che i momenti non dipendano dai parametri. In conclusione di procede a minimizzare il $\chi^2_{Neyman}$ per determinare i parametri $\vec{\theta}$.
+Dove per $n_i$ grande si \`{e} approssimata la $V[n_i] \approx n_i$. La necessit\`{a} di approssimare i dati a una Gaussiana e la varianza al numero di conteggi di un bin, \`{e} determinata dal fatto che cos\`{i} facendo il teorema di Gauss-Markov risulta soddisfatto poich\`{e} tra le ipotesi \`{e} necessario che i momenti non dipendano dai parametri. In conclusione si procede a minimizzare il $\chi^2_{Neyman}$ per determinare i parametri $\vec{\theta}$.
 
 \subsubsection{Procedura di fit di un istogramma}
 La procedura di fit di un istogramma con il metodo del $\chi^2$ di Neyman prevede quindi di:
@@ -641,6 +639,8 @@ La procedura di fit di un istogramma con il metodo del $\chi^2$ di Neyman preved
 	\item minimizzare il $\chi^2_{Neyman}$ trovando il valore di $\theta$ per cui l'accordo valori misurati - valori attesi \`{e} il migliore;
 	\item all'occorrenza effettuare un test del $\chi^2$
 	\end{itemize}
+	
+	Se $N \cdot p_i$ \`{e} piccolo, la distribuzione binominale/poissoniana non \`{e} approssimabile a una Gaussiana. Ne consegue che $Q^2$ non \`{e} approssimabile ad un $\chi^2$ e la varianza non \'{e} aprossimabile con $n_i$, in questi casi il metodo dei MQ non \'{e} utilizzabile.
 	
 	\subsection{Binned Data - Maximum Likelihood}
 	Fare il fit di un'istogramma quando non vale l'approssimazione Gaussiana prevede necessariamente l'utilizzo della binned Maximum Likelihood. Analogamente a quanto discusso a inizio sezione si procede a passare discretizzare il modello. Dove la funzione di likelihood associata al campione \`{e} data da
@@ -655,5 +655,4 @@ e si procede a massimizzare la funzione di likelihood:
 Ad un bin-size deve essere associata una probabilit\`{a} $p_{i}(\vec{\theta})$ piccola. Non \`{e} necessario che i bin abbiano tutti la stessa dimensione, possiamo sceglierle in modo che $N \cdot p_i$ sia grande e quindi valga l'approssimazione Gaussiana.\newline
 
 L'operazione di binning, fa perdere informazione, questo si pu\`{o} riflettere sull'incertezza del parametro stimato , ma anche sulla capacit\`{a} di verificare che i dati siano ben descritti dal modello. In questi casi \`{e} utili studiare la dipendenza del risultato dal binning.
-
 

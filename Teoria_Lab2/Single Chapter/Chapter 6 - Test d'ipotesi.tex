@@ -10,7 +10,9 @@
 \usepackage{graphicx}
 \usepackage{subfig}
 \usepackage{sidecap}
-\graphicspath{{/Users/giuliodilernia/Documents/Teoria_Lab2/images/}}
+
+\graphicspath{{/Users/giuliodilernia/Documents/Laboratory-Notes/Teoria_Lab2/images/}}
+
 \renewcommand{\baselinestretch}{1.3} 
 
 \titleformat{\chapter}[display]
@@ -151,21 +153,27 @@ Si sta commettendo un errore poich\`{e} se H1 \`{e} la forma funzionale sbagliat
 
 \section{Test di Kolgomorov-Smirnov}
 
-Consideriamo un insieme di N misure della stessa grandezza fisica X vogliamo testare l'ipotesi $H_0$ che siano campionamenti di una determinata pdf-modello. Una possibilit\`{a} \`{e} di usare il test del $\chi^2$ applicandolo agli istogrammi costruiti con le misure raccolte e la pdf-modello. Tale procedura \`{e} corretta, ma richiedere di binnare i dati e dunque si ha una perdita d'informazione, inoltre l'esito del test pu\`{o} dipendere dal binning scelto per la costruzione degli istogrammi.
+Consideriamo un insieme di N misure della stessa grandezza fisica X vogliamo testare la null hypothesis $H_0$ che siano campionamenti di una determinata pdf che prendiamo come riferimento. Una possibilit\`{a} \`{e} di usare il test del $\chi^2$ applicandolo agli istogrammi costruiti con le misure raccolte e la pdf-modello. Tale procedura \`{e} corretta, ma richiedere di binnare i dati e dunque si ha una perdita d'informazione, inoltre l'esito del test pu\`{o} dipendere dal binning scelto per la costruzione degli istogrammi.
 
-L'alternativa \`{e} data dal test di \textbf{Kolgomorv-Smirnof} che confronta le due distribuzioni cumulative (dati - pdf-modello) e in questo modo sfrutta tuta l'informazione contenuta nei dati.
+L'alternativa \`{e} data dal test di \textbf{Kolgomorv-Smirnof} che confronta le due distribuzioni cumulative (dati - pdf-modello) e in questo modo sfrutta tuta l'informazione contenuta nei dati. Tale test \`{e} di tipo non parametrico ovvero non richiede la costruzione di stimatori rispetto ai dati raccolti sperimentalmente e viene utilizzato per variabili aleatorie continue. 
 
 
-\subsection{Ricostruzione della cumulativa}
+\subsection{Costruzione del test}
 
-Consideriamo N misure ordinate in senso crescente, ricostruiamo la distribuzione cumulativa della pdf-modello, definendo una funzione a gradini $S_n$ rispetto ai dati del campione poich\`{e} sono presenti dei buchi nell'informazione.
+Date N misure ordinate in senso crescente, ricostruiamo la distribuzione cumulativa della pdf-modello, definendo una funzione a gradini $S_n (x)$ rispetto ai dati del campione, tale funzione prende il nome di \textbf{EDF (Empirical Distribution Function)}, la scelta ricade su una funzione di questo tipo poich\`{e} sono presenti dei buchi nell'informazione (campione) raccolta. La forma dell'EDF \`{e} data:
+
+\begin{equation}
+	S_n(x) = \sum_{i=1}^nI(x_i \leq x)  
+\end{equation}
+dove la funzione $I(x_i \leq x)$ prende il nome di \textbf{indicator function} ed \'{e} espressa come:
+
 \vspace{0.2in}
 
 \begin{minipage}{.4\textwidth}
 	\begin{align*}
-S_n(x) = 
+I(x) = 
 	\begin{cases}
-	n \quad x_i < x < x_{i+1} \\
+	1 \quad x \leq x_{i+1} \\
 	0 \quad \quad \quad \text{altrimenti}\\
 	\end{cases}
 \end{align*}
@@ -176,22 +184,18 @@ S_n(x) =
   \end{minipage}
 \vspace{0.2in}
 
-Ci si domanda quanto bene $S_n$ approssimi la cumulativa F(x), la risposta \`{e} che dipende dal numero di misure contate prima del gradino successivo e quindi da come si scelgono gli intervalli. Di primo impatto si potrebbe pensare di misurare la distanza tra i gradini e la cdf continua per dare una stima dell'approssimazione, il problema \`{e} che se sono presenti scarti significativi tra le due grandezze questo si rifletterebbe sulla stima complessiva in modo negativo. Per effettuare la misura consideriamo il discriminante:
+Ci si domanda quanto bene $S_n$ approssimi la cumulativa F(x), la risposta \`{e} che dipende dal numero di misure contate prima del gradino successivo e quindi da come si scelgono gli intervalli. Per valutare l'approssimazione per ogni punto distinto che costituisce un estremante degli intervalli $\tilde{x}$ valutiamo l'estremo superiore della differenza tra la EDF e la pdf con cui vogliamo confrontarla:
 \begin{equation*}
 	D_n = \sup_{x} \vert S_n(x) -F(x) \vert 
 \end{equation*}
- e si dimostra che la distanza $d_n = \sqrt{n}D_n$ per $n \rightarrow \infty$ converge alla distribuzione F(x).
- Il test consiste nel confrontare lo scarto massimo:
- \begin{equation*}
- 	\delta = Max \{D_n(x)\}
- \end{equation*}
- con una grandezza di riferimento $\delta_0$. Se $\delta > \delta_0$ l'ipotesi di compatibilit\`{a} viene rigettata. Il valore di $\delta_0$ \`{e} scelto in base alla probabilit\`{a} che la variabile casuale $\delta$ sia maggiore di $\delta_0$ quando il modello \`{e} corretto.
+ la distanza $d_n \equiv \sqrt{n}D_n$ definisce il valore di riferimento per il test di KS che consiste nel confrontare tale numero con una grandezza di riferimento $d_0$, che costituisce la quantit\'{a} di soglia rispetto alla quale rigettare la null hypothesis $H_0$. Se $d > d_0$ l'ipotesi di compatibilit\`{a} viene rigettata. Il valore di $\delta_0$ \`{e} scelto in base alla probabilit\`{a} che la variabile casuale $\delta$ sia maggiore di $\delta_0$ quando il modello \`{e} corretto.
  \begin{equation*}
  	P(\delta > \delta_0 \vert H_0) = \alpha
  \end{equation*}
- Il test \`{e} utile per confrontare due campioni di dati al fine di determinare se provengono dalla stessa popolazione.
+Tale metodo non parametrico \`{e} anche utile per confrontare due campioni di dati al fine di determinare se provengono dalla stessa popolazione. Si noti anche che la \textbf{EDF(x)} costruita \`{e} anch'essa una distribuzione cumulativa di probabilit\'{a}.
  
  \section{Confronto di una misura con il valore di riferimento}
+ 
  \subsection{Distribuzione di t-student}
  Si consideri un campione di N misure di cui si \`{e} calcolata la media campionaria $\overline{x} = \frac{1}{N} \sum x_i$ e si supponga di conoscere $\sigma_i$ delle singole misure e $E[x] = \mu$, allora la media aritmetica $\overline{x}$ \`{e} per il TCL \`{e} distribuita come una gaussian G($\overline{x}$,$\mu$, $\frac{\sigma}{\sqrt{N}}$). Come facciamo a dire che $\overline{x}$ e ${\mu}$ sono sufficientemente vicine tra loro rispetto alle incertezze ?
  \newline
@@ -257,7 +261,7 @@ dove la pdf(z) \`{e} Gaussiana se $\sigma_1$ e $\sigma_2$ sono senza errore, men
 
 \section{Intervalli di confidenza}
 
-Ipotizziamo che lo stimatore $\hat{\theta}$ segue una distribuzione gaussiana G($\hat{\theta},\theta_t,\sigma$) determinato il suo valore $\theta^*$ ci domandiamo quale sia la probabilit\`{a} che tale valore disti $\sigma$ dal valore vero $\theta_t$, ovvero $P[\theta^* \in (\theta_t - \sigma, \theta_t + \sigma)]$ = 0,68. Essendo $\theta^*$ una variabile aleatoria dipendente dal campione di stima possiamo riscrivere l'intervallo di confidenza come $ \theta_t \in (\theta^* - \sigma,\theta^* + \sigma)$ e dunque riscrivere la probabilit\`{a} come $P[\theta_t \in (\theta^* - \sigma, \theta^* + \sigma)]$ = 0,68, dunque si ha un 68 \% di probabilit\`{a} d'intercettare $\theta_t$.
+Ipotizziamo che lo stimatore $\hat{\theta}$ segue una distribuzione gaussiana G($\hat{\theta},\theta_t,\sigma$) determinato il suo valore $\theta^*$ ci domandiamo quale sia la probabilit\`{a} che tale valore disti $\sigma$ dal valore vero $\theta_t$, ovvero $P[\theta^* \in (\theta_t - \sigma, \theta_t + \sigma)]$ = 0,68. Essendo $\theta^*$ una variabile aleatoria dipendente dal campione mentre $\theta_t$ no, l'affermazione precedente non \`{e} corretta, in quanto $\theta_t$ non \`{e} una variabile aleatoria, per questo motivo riscriviamo l'intervallo di confidenza in $ \theta_t \in (\theta^* - \sigma,\theta^* + \sigma)$ e la probabilit\`{a} come $P[\theta_t \in (\theta^* - \sigma, \theta^* + \sigma)]$ = 0,68, determinando un 68 \% di confidenza nell'intercettare $\theta_t$ ripetendo l'esperimento.
 \begin{figure}[ht]
 \vspace{0.1in}
 \includegraphics[scale = 0.45]{intervaltheta}	
@@ -266,23 +270,51 @@ Ipotizziamo che lo stimatore $\hat{\theta}$ segue una distribuzione gaussiana G(
 
 \subsection{Metodo della cintura di confidenza}
 
-Ipotizziamo di non conoscere o non riuscire a determinare la pdf che descrive $\hat{\theta}$, al cambiare di $\theta_t$ cambia anche la pdf di $\hat{\theta}$ e di conseguenza anche gli intervalli di confidenza. Vogliamo determinare un intervallo di confidenza per i parametri stimati $\theta^*$ per farlo applichiamo il seguente metodo:
+Definiamo uno stimatore $\hat{\theta} \equiv \hat{\theta}(x)$, di un parametro $\theta$ rispetto ad un campione di N variabili aleatorie IID di una grandezza x, poich\`{e} lo stimatore dipende da variabili aleatorie anch'esso \`{e} una r.v. di conseguenza seguir\`{a} una distribuzione di probabilit\`{a} $f(\hat{\theta} \;\vert \; \theta)$. Per ciascun campione raccolto $\hat{\theta}$ definir\`{a} una stima $\theta^*$ del parametro, costruendo la pdf associata. Ripetendo l'esperimento con diversi campionamenti ciascuna distribuzione relativa  avr\`{a} un valore atteso $E[\hat{\theta}] = \theta_{t}^{i}$ e una varianza $V[\hat{\theta}] = \sigma_{\theta_{t}^i}^2$.\newline
+Per ciascun esperimento non conosciamo la forma analitica della pdf oppure non siamo in grado di definirla di conseguenza per stimare l'intervallo di confidenza di un certo valore di $\theta^*$ stimato usiamo il seguente metodo:
+\newline
+\begin{wrapfigure}{r}{0.\textwidth}
+\centering
+\includegraphics[scale = 0.4]{confidence}	
+\end{wrapfigure}
+$\bullet$ Per ogni valore di $\theta_{t}^i$ definiamo $pdf_i(\hat{\theta} \vert \theta_t$);\newline
 
-\begin{itemize}
-	\item Per ogni valore di $\theta_t$ definiamo pdf($\hat{\theta} \vert \theta_t$);
-	\item Si determinano i punti di pdf($\hat{\theta} \vert \theta_t$) che definiscono un intervallo di confidenza per il $\theta_t$ corrispettico;
-	\item Si tracciano due rette parallele che attraversano ciascuna i punti estremanti di ciascun intervallo di confidenza, definendo una banda nel piano $(\theta_t,\theta^*)$ che prende il nome di \textbf{Confidence Band}.
-\end{itemize}
-Quando si effettua una misura si trova $\theta^*$ e dove tale valore interseca la confidence band, punti
-d'intersezione determinano l'intervallo di confidenza di $\theta_t$. Si dimostra che l'intervallo trovato ha copertura uguale a quello scelto per le singole p.d.f.
+\noindent $\bullet$ Si determinano i punti della pdf($\hat{\theta} \vert \theta_t$) che definiscono un intervallo di confidenza per il $\theta_t$ corrispettivo;\newline
 
- 
+\noindent $\bullet$ Si tracciano due rette parallele che attraversano ciascuna i punti estremanti di ciascun intervallo di confidenza, definendo una banda nel piano $(\theta_t,\theta^*)$ che prende il nome di \textbf{Confidence Band}.
 \begin{figure}[ht]
 \vspace{0.2in}
-\includegraphics[scale = 0.44]{confidenceband}	
+\includegraphics[scale = 0.4]{confidenceband}	
 \centering
 \caption{Banda di confidenza ed intervallo di confiedenza}
 \end{figure}
 
+\noindent Quando si effettua una misura si trova $\theta^*$ e dove tale valore interseca la confidence band, punti
+d'intersezione determinano l'intervallo di confidenza di $\theta_t$. Si dimostra che l'intervallo trovato ha copertura uguale a quello scelto per le singole p.d.f.
+
+
+\section{Discovery Significance}
+
+Consideriamo di rilevare un numero di eventi $n_0$ in un intervallo di tempo, e che tale numero di eventi pu\`{o} essere distinto in due sotto categorie date da $n_s$ che \`{e} il numero di eventi dovuto a un processo fisico e $n_b$ numero di eventi che definiscono il "rumore di fondo" ( e rappresenta fenomeni non legati al processo fisico osservato) dove $n_0 = n_s + n_b$. A priori non abbiamo modo di sapere nel conteggio quanti fenomeni fisici e non compongano $n_0$. In compenso conosciamo il numero medio di eventi di entrambi i conteggi $E[n_s] = \nu_s$ e $E[n_b] = \nu_b$. \newline
+Costruiamo la nostra null hypothesis $H_0$ assumendo che del numero complessivo di fenomeni buona parte siano dati dal rumore di fondo; per confutare tale ipotesi utilizzando il p-value \`{e} necessario che questo sia pi\`{u} piccolo del valore di soglia $p_0$, in fisica delle particelle si sceglie $p_0 = 3 \times 10^-7$ per il segnale che una particella sia stata rilevata. La Poissoniana che  descrive la probabilit\`{a} di $n_b$ \`{e} data da:
+\begin{equation*}
+	Poiss(n_b,\nu_b) = \dfrac{\nu^n}{n!}e^{-\nu}
+\end{equation*} 
+
+\noindent la probabilit\`{a} di misurare un valore $n_b$ di quello misurato \`{e} data da:
+\begin{equation}
+	\beta = P(n > n_b^{0}) = \sum_{k =n_0+1}^{\infty}\dfrac{\nu^k}{k!}e^{-\nu} = 1- \sum_{k =0}^{n}\dfrac{\nu^k}{k!}e^{-\nu}  	
+\end{equation}
+Possiamo riscrivere l'equazione (6.7) come:
+
+\begin{equation}
+	1-\beta = \sum_{k =0}^{n}\dfrac{\nu^k}{k!}e^{-\nu} \approx \int_{2n_{b}^0}^{\infty}\chi^2(2n+2)d\chi^2
+\end{equation} 
+\newline
+approssimabile alla distribuzione del $\chi^2(2n+2)$ con 2(n+1) g.d.l., ovvero l'espressione di sinistra della 6.8 coincide con la sua c.d.f. Di conseguenza avremo che il:
+\begin{equation*}
+	\text{p-value} = 1- \beta
+\end{equation*}
+Per $\beta \approx 1$ il p-value \`{e} molto piccolo e quindi possiamo rigettare la null hypothesis $H_0$ formulata all'inizio e quindi il segnale osservato \`{e} effettivamente un processo fisico. Un valore grande di $\beta$ ci dice che si ha un alta probabilit\`{a} che per valori pi\`{u} grandi di $n_b^0$ i fenomeni osservati siano composti per la maggior parte da rumore di fondo. Mentre per $1-\beta$ molto piccolo si ha una bassa probabilit\`{a} che quanto osservato sia dato da rumore di fondo.
 
 \end{document}
