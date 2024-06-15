@@ -1,5 +1,6 @@
-	\setcounter{chapter}{1}
-	\chapter{Modelli di probabilit\`{a}}
+
+\setcounter{chapter}{1}
+\chapter{Modelli di probabilit\`{a}}
 	
 \section{La distribuzione Uniforme}
 
@@ -58,7 +59,7 @@ Un'altra propriet\`{a} importante della pdf \`{e} data dal fatto che se si ha un
   \end{minipage}
 \vspace{0.3in}
 
-\subsection{La distribuzione Gaussiana (o Normale)}
+\section{La distribuzione Gaussiana (o Normale)}
 
 Data una variabile aleatoria $x \in \Omega $ continua la distribuzione di probabilit\`{a} Gaussiana \`{e} definita come:
 
@@ -108,12 +109,12 @@ La distribuzione Gaussiana \`{e} particolarmente importante poich\`{e} per essa 
 
 \subsubsection{Teorema}
 
-Si ipotizzi di avere N variabile aleatorie $\{x_i\}_i^N$ indipendenti tra loro e ciascuna di esse segue una distribuzione di probabilit\`{a} $f_i(x)$, e definiamo una nuova variabile aleatoria $s = \sum_{i=1}^Nx_{i}$ che segue una distribuzione pdf(s), allora si avr\`{a} che al crescere del numero di variabili:
+Si ipotizzi di avere N variabile aleatorie $\{x_i\}_i^N$ indipendenti tra loro e ciascuna di esse segue una distribuzione di probabilit\`{a} $f_i(x)$ con $E[x_i] < \infty$ e $V[x_i] < \infty$, e definiamo una nuova variabile aleatoria $s = \sum_{i=1}^Nx_{i}$ che segue una distribuzione pdf(s), allora si avr\`{a} che al crescere del numero di variabili:
 \begin{equation*}
 	\lim_{N \rightarrow \infty} pdf(s) \rightarrow G(s,\mu_s,\sigma_s)
 \end{equation*}
 
-dove $\mu_s =\sum_{i=1}^N \mu_i$ e $\sigma_s^2 = \sum_{i=1}^N \sigma^2_i$.
+dove $\mu_s =\sum_{i=1}^N \mu_i$ e $\sigma_s^2 = \sum_{i=1}^N \sigma^2_i$ .
 
 \subsubsection{Corollario della media}
 
@@ -134,7 +135,7 @@ dunque si ha che la pdf delle medie campionarie di un campione che cresce conver
  	x = x_0 + \epsilon
  \end{equation*}
 
-la misura cos\`{i} ottenuta segue una pdf(x), il che equivale a dire che segue la pdf($\epsilon$), quando si effettua la misurazione di una grandezza possiamo pensare ad $\epsilon$ che l'incertezza di stima come il contributo di molteplici errori, dunque al crescere di tale numero per il TCL si avr\`{a} che pdf($\epsilon$) $\rightarrow$ G($\epsilon$,$\mu$,$\frac{\sigma}{\sqrt{N}}$).
+la misura cos\`{i} ottenuta segue una pdf(x), il che equivale a dire che segue la pdf($\epsilon$). Ipotizziamo di effettuare pi\`{u} misure di una stessa variabile aleatoria e di volerne calcolare la media, in realt\`{a} la media che calcoliamo \`{e} quella degli errori $\epsilon$, assummendo che $V[\epsilon_i] < \infty$ e $E[\epsilon_i] < \infty$ e che le $\{\epsilon_i\}_{i}^N$ siano indipendenti tra loro, possiamo applicare il TCL e dunque la  pdf($\overline{\epsilon}$) $\rightarrow$ G($\overline{\epsilon}$,$\mu$,$\frac{\sigma}{\sqrt{N}}$). Quindi l'errore medio delle misurazioni di un esperimento segue una distribuzione di probabilit\`{a} Gaussiana.
 
 \section{Distribuzione di probabilit\`{a} Log-normale}
 
@@ -221,28 +222,28 @@ Consideriamo di avere una variabile aleatoria x di cui effettuiamo N misurazioni
 \begin{wrapfigure}{l}{0.\textwidth}
 \centering
 
-\includegraphics[scale = 0.35]{binning}	
+\includegraphics[scale = 0.33]{binning}	
 
 \end{wrapfigure}
 
 \noindent L'operazione \`{e} equivalente a campionare N volte una pdf(x). Posto che le $\{x_{i}\}_{i}^N$ misure siano il campione di riferimento, la statistica si pone obbiettivo quello di ricostruire partendo dal campione le caratteristiche di una pdf(x).
-
-\noindent Per farlo si procede a costruire un istogramma e a contare il numero di eventi $k_{i}$ che cadono all'interno di un bin e rappresentare tale numero con una barra. Il numero di misure $k_i$ che cade all'intero di un bin \`{e} una variabile aleatoria.
-
-Di conseguenza studiando il comportamento di un singolo bin [a,b), il numero di misure $k_{i}$ \`{e} descritto da una distribuzione di probabilit\`{a}, poich\`{e} una misura cade o non cade all'interno dell'intervallo la pdf($k_i$) \`{e} quella di Bernoulli. 
 \begin{wrapfigure}{r}{0.\textwidth}
 \centering
-
-\includegraphics[scale = 0.3]{Bernouli_Histo}	
+\includegraphics[width = 1.9in]{Bernouli_Histo}	
 
 \end{wrapfigure}
+\noindent Per farlo si procede a costruire un istogramma e a contare il numero di eventi $k_{i}$ che cadono all'interno di un bin e rappresentare tale numero con una barra. Il numero di misure $k_i$ che cade all'intero di un bin \`{e} una variabile aleatoria.
+
+
+Di conseguenza studiando il comportamento di un singolo bin [a,b), il numero di misure $k_{i}$ \`{e} descritto da una distribuzione di probabilit\`{a}, poich\`{e} un fenomeno cade o non cade all'interno dell'intervallo la pdf($k_i$) \`{e} quella di Bernoulli. 
+
 Reiterando l'esperimento sullo stesso bin il numero di successi $k_{i}$ seguir\`{a} una pdf(k) di una binomiale $B(k \vert N,p)$ dove la probabilit\`{a} \`{e} $ p = \int_{a}^{b}{pdf(x)dx}$ sull'intervallo del bin associato.
 
-Di conseguenza un conteggio di misure \`{e} soggetto a fluttuazioni statistiche, e al crescere del numero delle misure l'istogramma assumer\`{a} la distribuzione di probabilit\`{a} pdf(x) della variabile aleatoria X misurata.
+ Un conteggio di misure \`{e} soggetto a fluttuazioni statistiche, e al crescere del numero delle misure l'istogramma assumer\`{a} la distribuzione di probabilit\`{a} pdf(x) della variabile aleatoria X misurata.
 \newline
 \noindent Se ipotizziamo che X abbia una distribuzione uniforme, valore di aspettazione e varianza di un conteggio coincideranno con quella della distribuzione Binomiale.
 
-I metodi statisti che consentono di utilizzare il metodo dell'istogramma richiedono che i conteggi $k_{i}$ siano variabili aleatorie indipendenti, si hanno due strategie affinch\`{e} questo sia realizzabile:
+I metodi statisti che possono essere applicati a misure binnate richiedono che i conteggi $k_{i}$ siano variabili aleatorie indipendenti, affinch\`{e} tale condizione risulti essere verificata si hanno due strategie possibili:
 
 \begin{itemize}
 \item
@@ -267,7 +268,7 @@ Considerando quando discusso nella sezione precedente per ogni singolo bin che s
 
 \section{Distribuzione di Poisson}
 
-La distribuzione di Poisson \`{e} una distribuzione di probabilit\`{a} discreta che esprime la probabilit\`{a} che un numero di di eventi indipendenti si verifichi in un certo intervallo di spazio o tempo fissato con una frequenza media costante. il verificarsi dell'evento a un tempo t non influenza il verificarsi del medesimo in un intervallo di tempo successivo o precedente  al tempo t.
+La distribuzione di Poisson \`{e} una distribuzione di probabilit\`{a} discreta che esprime la probabilit\`{a} che un numero di eventi indipendenti si verifichi in un certo intervallo di spazio o tempo fissato con una frequenza media costante. il verificarsi dell'evento a un tempo t non influenza il verificarsi del medesimo in un intervallo di tempo successivo o precedente  al tempo t.
 La probabilit\`{a} di contare k eventi in un intervallo di tempo unitario \`{e}:
 
 \begin{equation}
@@ -311,7 +312,7 @@ Il modello su cui si basa la distribuzione di Poisson \`{e} dato dalle seguenti 
 
 \begin{itemize}
 	\item la probabilit\`{a} che un evento avvenga in un intervallo di tempo [t,t+dt] \`{e} data da $p\cdot dt$, dove p \`{e} un valore costante e indipendente da t;
-	\item la probabilit\`{a} di avere pi\`{u} di un evento nell'intervallo dx \`{e} nulla.
+	\item la probabilit\`{a} di avere pi\`{u} di un evento nell'intervallo dt \`{e} nulla.
 	\item gli eventi sono indipendenti tra loro.
 \end{itemize}
 
@@ -350,12 +351,12 @@ dove q(0) \`{e} determinata normalizzando la distribuzione di probabilit\`{a}. \
 Per comodit\`{a} poniamo q(0)=1. Definiamo $A = \{ 1 \; evento \; in \; [t_1,t_1+dt_1] \}$ ed B = \{ 0 eventi in [0,$t_1$]\} definiamo:
 
 \begin{equation}
-	P(A,E_1 \vert I) = P(A \vert I) \cdot P(E_1 \vert I) = e^{-pt}(p \cdot dt)
+	P(A,B \vert I) = P(A \vert I) \cdot P(B \vert I) = e^{-pt}(p \cdot dt)
 \end{equation} 
 
 ipotizzando di costruire una catena di eventi in cui si realizza e non si realizza un evento per tempi ordinati si ha che:
 \begin{equation}
-	P(A,E \vert I) = e^{-pt_1} \cdot p \cdot dt_1 \cdot e^{-p(t_2-t_1)} \cdot p \cdot dt_2 \cdots = e^{-pt}p^ndt_1 \cdots dt_n
+	P(A,B \vert I) = e^{-pt_1} \cdot p \cdot dt_1 \cdot e^{-p(t_2-t_1)} \cdot p \cdot dt_2 \cdots = e^{-pt}p^ndt_1 \cdots dt_n
 \end{equation}
 
 Per definire una probabilit\`{a} che si realizzino n eventi in un intervallo di tempo [0,t], a prescindere dal tempo preciso in cui avvengono, dobbiamo sommare le probabilit\`{a} definite in (2.23):
@@ -372,24 +373,23 @@ il prodotto d'integrali ha come soluzione $\frac{t^n}{n!}$ e dunque:
 
 \section{Distribuzione Esponenziale}
 
-La distribuzione esponenziale \`{e} la distribuzione dei tempi che intercorrono tra due eventi Poissoniani. Infatti consideriamo k il numero di eventi in un processo Poissoniano con frequenza p, avvenuti in un intervallo di tempo [0,t]. Allora si ha:
+La distribuzione esponenziale \`{e} la distribuzione dei tempi che intercorrono tra due eventi Poissoniani, ovvero la probabilit\`{a} che nessun evento si verifichi. Infatti consideriamo k il numero di eventi definiti da una pdf Poissoniana con frequenza p, avvenuti in un intervallo di tempo [0,t]. Allora si ha:
 
 \begin{equation*}
 	P(k,p) = \dfrac{(pt)^k}{k!}e^{-pt}
 \end{equation*}
 \newline
-Sia $T > t$ il tempo in cui effettuiamo la prima misura, poich\`{e} la frequenza p \`{e} una costante indipendente dal tempo, se misuriamo la probalit\`{a} per 0 eventi in un tempo $t < T$ si avr\`{a}:
+ Se misuriamo la probalit\`{a} che nessun evento si verifichi in un tempo $t < T$ si avr\`{a}:
 
 \begin{equation*}
 	P(0 \vert p,t) = \dfrac{(pt)^0}{0!}e^{-pt} = e^{-pt}
 \end{equation*}
 \newline
-Se rileviamo il medesimo evento per $T > t$ avr\`{a} la stessa probabilit\`{a} dell'evento avvenuto al tempo t:
+ e si ha dunque una pdf Poissoniana. Se rileviamo il medesimo evento per $T > t$ si avr\`{a} che la probabilit\`{a} dell'evento avvenuto al tempo T \`{e} descritta dalla medesima pdf per il tempo t antecedente:
 
 \begin{equation*}
 	P(0 \vert p, T>t) = P(0 \vert p, t) = e^{-pt}
 \end{equation*}
- 
  Dunque la distribuzione di probabilit\`{a} che intercorre da tra due eventi Poissoniani \`{e} esponenziale.
 \begin{figure}[ht]
 \vspace{0.2in}
@@ -496,7 +496,7 @@ Allora si dimostra che dall'espressione binomiale:
  \end{equation*}
 \newline
 
-Si dimostra inoltre che data una distribuzione Binomiale $B(k \vert N,p) \rightarrow G(k,\mu,\sqrt{\mu})$ al crescere del numero di misure $N \rightarrow \infty $ per $\mu = N \cdot p$.
+Si dimostra inoltre che data una distribuzione Binomiale $B(k \vert N,p) \rightarrow G(k,\mu,\sqrt{\mu})$ al crescere del numero di misure $N \rightarrow \infty $ per $\mu = N \cdot p$ costante.
 \newline
 
 Vale anche il fatto che per una Poissoniana si ha $Poiss(k,\lambda) \rightarrow G(k,\lambda, \sqrt{\lambda})$ per $\lambda \rightarrow \infty $.
@@ -517,7 +517,7 @@ Vale anche il fatto che per una Poissoniana si ha $Poiss(k,\lambda) \rightarrow 
 La distribuzione di $\chi^2$ nasce nel contesto della modellazione di dati per la stima di parametri usando i metodi di maximum likelihood e minimi quadrati. Dato un campione di n punti $\{(x_i,y_i)\}_{i}^N$ e un modello $f(x, \bold{\underline{\theta}})$, dipendente da m parametri $\underline{\theta}$ si valuta la bont\`{a} del modello nell'approssimare i dati usando la funzione di $Q^2$ definita come:
 
 \begin{equation}
-	Q^2 = \sum_{i=1}^{n}\dfrac{[y_i - f(x_i,\underline{\theta})]}{\sigma^2_i}
+	\chi^2 = \sum_{i=1}^{n}\dfrac{[y_i - f(x_i,\underline{\theta})]}{\sigma^2_i}
 \end{equation}
 
 dove le $\sigma^2_i$ sono gli errori sulle n misure di $y_i$. 

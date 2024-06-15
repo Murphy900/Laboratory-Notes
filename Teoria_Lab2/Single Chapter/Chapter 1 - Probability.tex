@@ -15,7 +15,7 @@
 \usepackage{subfig}
 \usepackage{sidecap}
 
-\graphicspath{{/Users/giuliodilernia/Documents/Teoria_Lab2/images/}}
+\graphicspath{{/Users/giuliodilernia/Documents/Laboratory-Notes/Teoria_Lab2/images/}}
 
 \renewcommand{\baselinestretch}{1.3} 
 
@@ -26,11 +26,11 @@
   {\titlerule\vspace{1ex}\filleft}
   [\vspace{1ex}\titlerule]
 
-\graphicspath{{/Users/giuliodilernia/Documents/Teoria_Lab2/images/}}
 
 \begin{document}
 \setcounter{chapter}{0}
 \chapter{La probabilit\`{a} e la distribuzione di probabilit\`{a}} 
+
 \section{Assiomi di Kolgomorov}
 \textcolor{blue}{Come si definisce la probabilit\'{a} secondo Kolgomorov?}\newline
 
@@ -160,7 +160,13 @@ Si definisce distribuzione cumulativa la primitiva dell'integrale della pdf di u
 \end{equation}
 
 di conseguenza la cdf(x) descrive l'evolversi della probabilit\'{a} di una variabile casuale.
-
+\subsubsection{Propriet\`{a} di unc cdf}
+Una cdf gode delle seguenti propriet\`{a}:
+\begin{itemize}
+	\item \`{E} una funzione monotona crescente  e definita poisitiva 
+	\item cdf(x) $\in [0,1]$
+	\item $P(a \leq x \leq b) = cdf(a) - cdf(b)$ 
+\end{itemize}
 \subsubsection{Corollario}
 
 Esiste una forma analitica della cdf(x) di una r.v. $\iff$ la pdf ammette primitiva. 
@@ -172,7 +178,7 @@ Esiste una forma analitica della cdf(x) di una r.v. $\iff$ la pdf ammette primit
     \qquad
     \subfloat[\centering cdf(x)]{{\includegraphics[width=5cm]{cdf} }}
 \end{figure}
-
+\newpage
 \subsection{Istogrammi}
 
 \textcolor{blue}{Che cos'\'{e} un istogramma ?}\newline
@@ -187,7 +193,7 @@ Esiste una forma analitica della cdf(x) di una r.v. $\iff$ la pdf ammette primit
 
 Consideriamo una variabile aleatoria x, di cui conosciamo $\{x_i\}_i^N$ valori distinti, utilizziamo tali grandezze come estremi per definire degli intervalli $\omega_{k} = [x_i, x_{i+1}) $ disgiunti tra loro $\omega_{k} \cap \omega_{m} = \varnothing$ per $k \neq m$, sull'asse reale. Tali intervalli vengono definiti \textbf{bin}.
 
-\begin{wrapfigure}[3]{l}{0.\textwidth}
+\begin{wrapfigure}[6]{l}{0.\textwidth}
 
 \centering
 
@@ -211,13 +217,15 @@ In questo modo posizionando sull'asse delle ordinate il numero di conteggi $n_l(
 \end{wrapfigure}
 
 All'aumentare del numero di elementi $N \rightarrow \infty$ e diminuendo l'ampiezza dei bin $\Delta x \rightarrow 0 $, ci si riconduce alla nozione di probabilit\'{a} (1.1), in questo modo si passa a una pdf(x) continua.
-Al crescere del numero di eventi e il numero di eventi cambia  e di conseguenza cambia la frequenza relativa.
+Per ogni bin \`{e} presente un punto $x_i$ tale che 
 
-\begin{equation}
-	\dfrac{f_{k+1} - f_{k}}{\Delta x} = \dfrac{df}{dx} \Rightarrow df = \dfrac{(f_{k+1} - f_{k})}{\Delta x}dx
-\end{equation}
-
-\noindent di conseguenza $p \rightarrow \dfrac{d}{dx}f(x)dx$.
+\begin{equation*}
+	\int_{x_{min}^i}^{x_{max}^i}f(x) dx = f(x_i)\Delta x_i
+\end{equation*}
+si ha che 
+\begin{equation*}
+	\lim_{N \rightarrow \infty \atop \Delta \rightarrow 0} \int_{x_{min}^i}^{x_{max}^i}f(x) dx \rightarrow p_i \Rightarrow f(x_i) =  \dfrac{p_i}{\Delta x_i}
+\end{equation*}
 
 \subsection{Propriet\`{a} di una probability distribution function}
 \textcolor{blue}{Che cosa sono i momenti di una pdf?}\newline
@@ -248,6 +256,10 @@ dove  E[ ] \`{e} un operatore lineare:
 	\item $E[x+y] = E[x] + E[y]$
 	\item $E[\alpha x] = \alpha E[x] \;\; \forall \alpha \in \mathbb{R}$
 \end{itemize}
+ Per una variabile aleatoria discreta il valore di aspettazione \`{e} dato da:
+ \begin{equation}
+ 	E[x] = \sum_{i=1}^{+\infty} p_i x_i
+ \end{equation}
 
 \subsection{Momenti principali di una pdf per la popolazione e per un campione}
 
@@ -347,7 +359,7 @@ tale stima fornisce informazioni sul peso delle code della distribuzione, nel se
 \end{wrapfigure}
 
 
-\noindent Definiamo \textbf{moda} di una popolazione il valore che definisce il massimo della pdf. \newline
+\noindent Definiamo \textbf{moda} di una popolazione il valore che definisce il massimo della pdf. Mentre per un campione la moda \`{e} definita dalla misura che possiede la frequenza relativa maggiore.\newline
 
 \noindent Mentre si definisce \textbf{mediana} il valore che  divide in due parti uguali la pdf. Nel caso dei campioni le grandezza diventano rispettivamente il valore che compare con maggior frequenza e la misura che divide in due parti eguali il campione.
 
@@ -388,7 +400,7 @@ di conseguenza:
 per comodit\`{a} si \`{e} posto un modulo affinch\`{e} la funzione sia sempre positiva. In conclusione si ha che:
 
 \begin{equation}
-	pdf(y) = pdf(x)\vert \dfrac{d}{dy}f^{-1}(y) \vert
+	pdf(y) = pdf(x)\vert f'(x) \vert
 \end{equation}
  
  Nel caso in cui abbia pi\`{u} di una dimensione \`{e} necessario che la funzione sia differenziabile e monotona e il modulo della derivata prima della funzione di cambio delle variabili viene sostituita dal modulo del determinante dell'inversa della matrice Jacobiana.
@@ -425,8 +437,8 @@ Il valore di aspettazione per una pdf(y) dove y = ax+b diventa:
  \newline
  di conseguenza il valore di aspettazione \`{e}:
  
- \begin{equation*}
- 	E[y] = \int{y \cdot pdf(y)dy = y(\mu_x) + \dfrac{dy}{dx}\Big\vert_{x = \mu_x}\int{(x-\mu_x)\cdot pdf(x)dx} + 
+\begin{equation*}
+ 	E[y] = \int y \cdot pdf(y)dy = y(\mu_x) + \dfrac{dy}{dx}\Big\vert_{x = \mu_x}\int{(x-\mu_x)\cdot pdf(x)dx} + 
  \end{equation*}
  \begin{equation*}
  	+ \dfrac{1}{2}\dfrac{dy^2}{dx^2}\Big\vert_{x = \mu_x} \int{(x-\mu_x)^2 \cdot pdf(x)dx} = 

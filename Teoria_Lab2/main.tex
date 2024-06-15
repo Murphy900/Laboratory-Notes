@@ -19,6 +19,18 @@
 \fancyfoot[C]{\thepage}
 \fancyhead[RO,LE]{\leftmark} 
 \fancyhead[RE,LO]{}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cyan,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Statistics and Probability},
+    pdfpagemode=FullScreen,
+    }
+
+\urlstyle{same}
+
 \graphicspath{{/Users/giuliodilernia/Documents/Laboratory-Notes/Teoria_Lab2/images/}}
 
 \renewcommand{\baselinestretch}{1.3} 
@@ -30,10 +42,17 @@
   {\titlerule\vspace{1ex}\filleft}
   [\vspace{1ex}\titlerule]
 
-\begin{document}
 
+\begin{document}
 \includepdf[pages = 1,fitpaper]{copertina.pdf}
 \tableofcontents
+
+\input{Chapter1-Probability}
+\input{Chapter2-LeDistribuzioni}
+\input{Chapter3-DistribuzionidiProbabilitaMultidimensionali}
+\input{Chapter4-StimediParametri}
+\input{Chapter5-MaximumLikelihoodMinimiQuadrati}
+\input{Chapter6-Testd'ipotesi}
 
 \begin{thebibliography}{4}
 
@@ -42,15 +61,7 @@
 \bibitem{Appunti} Appunti manoscritti presi durante le lezioni frontali tenute dal prof. Pietro Govoni per il corso di Laboratorio di calcolo e statica del secondo anno di Fisica, Universit\`{a} di Milano Bicocca
 \bibitem{Pr} Data Analysis Technique for Physical Scientist, Pruneau, Cambridge Univeristy Press, 2017
 \bibitem{ox} Statistical Data Analysis, Glen Cowan, Clarendon Press, 1998
-
+\bibitem{mt} Statistical Methods in Data Analytics, Metzger
 \end{thebibliography}
-
-
-\input{Chapter1-Probability}
-\input{Chapter2-LeDistribuzioni}
-\input{Chapter3-DistribuzionidiProbabilitaMultidimensionali}
-\input{Chapter4-StimediParametri}
-\input{Chapter5-MaximumLikelihoodMinimiQuadrati}
-\input{Chapter6-Testd'ipotesi}
 
 \end{document}
