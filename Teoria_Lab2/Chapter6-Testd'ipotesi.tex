@@ -1,3 +1,4 @@
+
 \setcounter{chapter}{5}
 \chapter{Test d'ipotesi}
 
@@ -28,7 +29,7 @@ Introduciamo una nuova quantit\`{a} definita \textbf{p-value} che ha la seguente
   \end{minipage}
 \vspace{0.2in}
 
-\noindent la quantit\`{a} cos\`{i} definita risulta essere una misura di probabilit\`{a}. Per rispondere alla domanda precedente fissiamo una soglia di tolleranza del p-value oltre alla quale i valori ottenuti risultano essere dei \textbf{falsi negativi}. Riprendendo i modelli $H_0$ e $H_1$ che definiamo rispettivamente \textbf{null hypothesis} e \textbf{alternative hypothesis} poich\`{e} $H_1$ ha un valore di aspettazione pi\`{u} grande di $H_0$, fissata una soglia del p-value, e definita una statistica x associata al $\chi^2(x \vert N-k)$ avremo che:
+\noindent la quantit\`{a} cos\`{i} definita risulta essere una misura di probabilit\`{a}. Per rispondere alla domanda precedente fissiamo una soglia di tolleranza del p-value oltre alla quale i valori ottenuti risultano essere dei \textbf{falsi negativi}. Riprendendo i modelli $H_0$ e $H_1$ che definiamo rispettivamente \textbf{null hypothesis} e \textbf{alternative hypothesis}, fissata una soglia del p-value, e definita una statistica x associata (come per esempio il $Q^2$) al $\chi^2(x \vert N-k)$ avremo che:
 \begin{itemize}
 	\item H0 \`{e} rigettata se x cade nella regione in azzurro $\omega_\alpha^* $ in figura 6.2
 	\item H0 \`{e} accettata se x cade nella regione in verde $\omega_\alpha$ nella figura sottostante.
@@ -37,16 +38,18 @@ Introduciamo una nuova quantit\`{a} definita \textbf{p-value} che ha la seguente
 \includegraphics[scale = 0.4]{hypo}	
 \centering
 \end{figure}
-Su quanto discusso fino ad ora possiamo fare le seguenti osservazioni:
+Dunque date due ipotesi $H_0$ e $H_1$ decidiamo di considerare affermativa quella che restituisce il valore del p-value pi\'{u} alto (ovvero quella con probabilit\'{a} maggiore) rispetto al valore $p_0$ di soglia considerato, apparentemente sembrerebbe sufficiente per concludere quale delle due ipotesi sia verifica, ma in realt\'{a} come si vedr\'{a} nelle sezioni succesive la realt\'{a} sperimentale \'{e} pi\'{u} complicata e posso esserci casi di falso positivi.
+
+\noindent Su quanto discusso fino ad ora possiamo fare le seguenti osservazioni:
 \begin{itemize}
-	\item I minimi quadrati calcolano il $Q^2$ (e anche la ML calcola i parametri $\hat{\theta}$ da cui si può calcolare il $Q^2$);
-	\item Test del $\chi^2$ funziona perché conosciamo la p.d.f. del $Q^2 \Rightarrow \sigma^2$  deve essere nota e ben stimata;
-	\item Test del $\chi^2$ è un test integrale $\Rightarrow$ Somma gli scarti su tutti gli eventi.
+	\item I minimi quadrati permettono di calcolare il $Q^2$ (e anche il metodo di ML calcola i parametri $\hat{\theta}$ da cui si può calcolare il $Q^2$);
+	\item Il test del $\chi^2$ \'{e} applicabile se sappiamo calcolare il valore del $Q^2 \Rightarrow \sigma^2$  deve essere nota e ben stimata;
+	\item Test del $\chi^2$ \`{e} un test integrale $\Rightarrow$ Somma gli scarti su tutti gli eventi, e dunque pu\'{o} presentare delle limitazioni (esempio sotto).
 \end{itemize}
 
 \subsubsection{Esempio}
 
-\begin{wrapfigure}{l}{0.\textwidth}
+\begin{wrapfigure}[18]{l}{0.\textwidth}
 \centering
 \includegraphics[scale = 0.5]{esempio}	
 \end{wrapfigure}
@@ -63,16 +66,19 @@ misure, il test non lo tiene in considerazione.
 Se consideriamo una dispersione delle misure come nella terza figura e
 assumiamo che abbia il medesimo p-value delle altre due, si ha
 che il test non considera che i dati diminuiscono di valore lungo l'asse delle ordinate e dunque si ottiene un \textbf{falso positivo}, ovvero p-value \`{e} verificato, ma il modello non descrive adeguatamente il comportamento dei dati sperimentali.
-
 Il fatto che il test del $\chi^2$ abbia forma integrale limita la generalit\`{a} con cui possiamo decidere se il risultato ottenuto sia affidabile o meno.
+\newline
+\newline
+\textbf{Definizione di Overfitting}
 
 \begin{wrapfigure}{r}{0.\textwidth}
 \centering
 \includegraphics[scale = 0.5]{overfit}	
 \end{wrapfigure}
+\vspace{0.05in}
 
 \noindent Ipotizziamo di avere un fit che ha $Q^2$ = 0 e p-value-1,
-ovvero i dati vengono interpolati perfettamente , questo non è
+ovvero i dati vengono interpolati perfettamente , questo non \`{e}
 un buon risultato. Si ha un caso di overfitting, dove si sono introdotti così tanti parametri che
 il risultato del fit si \`{e} completamente adattato alle misure, perdendo qualsiasi
 capacit\`{a} di generalizzare il modello. 
@@ -80,11 +86,44 @@ capacit\`{a} di generalizzare il modello.
 \subsection{Applicazione del test di $\chi^2$}
 
 Se il modello \`{e} corretto $y = \psi(x,\vec{\theta})$, allora il metodo dei MQ fornisce una stima dei parametri $\vec{\theta}$ che lo descrivono. Il valore stimato dei parametri rappresenta il punto di minimo del funzione di $Q^2_{min} = Q^2(x,\vec{\theta}_{MQ})$ rispetto al campione sperimentale, tale punto di minimo coincide anche con il massimo della distribuzione di $\chi^2$ se pdf($\epsilon$) seguono una distribuzione gaussiana, che \`{e} dato da $E[Q^2] = N-k$ e quindi $Q^2_{min} = N-k$. \newline
-Il $\chi^2$ ridotto \`{e} definito come $\chi^2_{0} = \frac{\chi^2}{ndof}$ ci\`{o} implica che per $\chi^2_{min} = Q^2_{min}$ il ridotto \`{e} $\chi^2_0 \sim 1$. \newline
-Se il valore del $\chi^2_{min}$ \`{e} lontano dal suo valore di aspettazione N-k, possiamo concludere che alcune delle ipotesi precedenti non sia corrette e dunque \textbf{i dati non confermano il modello}.
+Il $\chi^2$ ridotto \`{e} definito come $\chi^2_{0} = \frac{\chi^2}{N-k}$ ci\`{o} implica che per $\chi^2 = Q^2_{min}$ il ridotto \`{e} $\chi^2_0 \sim 1$. \newline
+Se il valore del $\chi^2$ \`{e} lontano dal suo valore di aspettazione N-k (o 1 nel caso si usi quello ridotto), possiamo concludere che alcune delle ipotesi precedenti non sia corrette e dunque \textbf{i dati non confermano il modello}. 
 
+\noindent Le regioni a bassi valori di $\chi^2$ corrispondono a scarti tra modello e dati molto piccoli, quindi a casi di overfitting. Tali risultati sono altamente improbabili e possono essere dovuti a sovrastime degli errori, la loro pdf non \'{e} Gaussiana o se le incertezze considerate non sono solo di natura sistematica. 
+
+\begin{figure}[ht]
+\vspace{0.1in}
+\includegraphics[scale =0.4]{testchi}	
+\centering
+\caption{Overfitting}
+\end{figure}
+
+\subsection{Distribuzione di probabilit\'{a} del p-value}
+Poich\'{e} $Q^2$ \'{e} una variabile aleatoria anche il p-value lo \'{e} e dunque possiede una sua distribuzione di probabilit\'{a}, per determinarla consideriamo un cambio di variabili:
+\begin{equation*}
+	x: f(x) \text { se } u^{-1}(y)=v(y) \quad \Rightarrow \quad y: a(x) \rightarrow g(y)=f(v(y)) \cdot\left|v'(y)\right|
+\end{equation*}
+Posto $x = Q^2$, $y=p$ e f = $\chi^2$ si ha che :
+\begin{equation*}
+	u(x) \rightarrow 1-X \quad X(x)=\int_{-\infty}^{x} \chi^2(t, n) d t \quad e \quad v(y)=(1-X)^{-1}
+\end{equation*}
+e quindi:
+\begin{equation*}
+	g(y)=\chi^2\left(Q^2\right)\left|\frac{1}{(1-X)^{\prime}\left(Q^2\right)}\right|=\frac{\chi^2\left(Q^2\right)}{\chi^2\left(Q^2\right)}=1
+\end{equation*}
+\newline
+\noindent di conseguenza  il p-value segue una \textbf{distribuzione uniforme}. 
+\newline
+
+\noindent Un test che \'{e} possibile fare per verificare se le condizioni iniziali affinch\'{e} il test del $\chi^2$ sia applicabile \'{e} quello di verificare che ripetendo le misure il p-value segua una distribuzione uniforme.
 \section{Errori di test statistici}
 
+Quanto discusso in questa sezione fa riferimento al test del $\chi^2$, ma generalizzabile a qualsiasi statistica $\beta$ per cui \'{e} possibile definire due distribzioni di probabilit\'{a}:
+
+\begin{itemize}
+	\item $pdf(\beta \vert H_0)$ = \textbf{Null Hypothesis 
+	\item $pdf(\beta \vert H_1)$ = \textbf{Alternative Hyp}othesis}
+\end{itemize}
 \subsection{Errori del $I^{\circ}$ tipo}
 
 Un errore del primo tipo rappresenta il numero di casi veri per la null hypothesis Ho che scartiamo fissata una soglia del p-value.
@@ -163,15 +202,15 @@ Ci si domanda quanto bene $S_n$ approssimi la cumulativa F(x), la risposta \`{e}
 \begin{equation*}
 	D_n = \sup_{x} \vert S_n(x) -F(x) \vert 
 \end{equation*}
- la distanza $d_n \equiv \sqrt{n}D_n$ definisce il valore di riferimento per il test di KS che consiste nel confrontare tale numero con una grandezza di riferimento $d_0$, che costituisce la quantit\'{a} di soglia rispetto alla quale rigettare la null hypothesis $H_0$. Se $d > d_0$ l'ipotesi di compatibilit\`{a} viene rigettata. Il valore di $\delta_0$ \`{e} scelto in base alla probabilit\`{a} che la variabile casuale $\delta$ sia maggiore di $\delta_0$ quando il modello \`{e} corretto.
+ la distanza $d_n \equiv \sqrt{n}D_n$ definisce il valore di riferimento per il test di KS che consiste nel confrontare tale numero con una grandezza di riferimento $d_0$, che costituisce la quantit\'{a} di soglia rispetto alla quale rigettare la null hypothesis $H_0$. Se $d > d_0$ l'ipotesi di compatibilit\`{a} viene rigettata. Il valore di $d_0$ \`{e} scelto in base alla probabilit\`{a} che la variabile casuale $d$ sia maggiore di $d_0$ quando il modello \`{e} corretto.
  \begin{equation*}
- 	P(\delta > \delta_0 \vert H_0) = \alpha
+ 	P( d > d_0 \vert H_0) = \alpha
  \end{equation*}
 Tale metodo non parametrico \`{e} anche utile per confrontare due campioni di dati al fine di determinare se provengono dalla stessa popolazione. Si noti anche che la \textbf{EDF(x)} costruita \`{e} anch'essa una distribuzione cumulativa di probabilit\'{a}.
  
  \section{Confronto di una misura con il valore di riferimento}
  
- \subsection{Distribuzione di t-student}
+ \subsection{Distribuzione t-student}
  Si consideri un campione di N misure di cui si \`{e} calcolata la media campionaria $\overline{x} = \frac{1}{N} \sum x_i$ e si supponga di conoscere $\sigma_i$ delle singole misure e $E[x] = \mu$, allora la media aritmetica $\overline{x}$ \`{e} per il TCL \`{e} distribuita come una gaussian G($\overline{x}$,$\mu$, $\frac{\sigma}{\sqrt{N}}$). Come facciamo a dire che $\overline{x}$ e ${\mu}$ sono sufficientemente vicine tra loro rispetto alle incertezze ?
  \newline
  Per determinare la distanza tra le grandezze definiamo la distribuzione t-student data dalla variabile aleatoria:
@@ -200,7 +239,7 @@ Tale metodo non parametrico \`{e} anche utile per confrontare due campioni di da
  	\end{matrix}	
  \end{align*}
  \newline
- Per $\nu \rightarrow \infty$ la distribuzione diventa Gaussiana. Si osserva che la pdf della t-student \`{e} un po' pi\`{u} larga della distribuzione Gaussiana (fig 6.2).
+ Per $\nu = g.d.l. \rightarrow \infty$ la distribuzione diventa Gaussiana. Si osserva che la pdf della t-student \`{e} un po' pi\`{u} larga della distribuzione Gaussiana (fig 6.2).
  
   
 \begin{figure}[ht]
@@ -218,12 +257,11 @@ la parte in azzurro segue la pdf di una Gaussiana normalizzata N(0,1), mentre la
 \begin{equation*}
 	\textcolor{red}{\dfrac{1}{\Big [ \dfrac{\sigma^2}{\hat{\sigma}^2} \Big ]^{\frac{1}{2}}} = \dfrac{1}{\Big[  \frac{N-1}{\chi^2} \Big ]^{\frac{1}{2}} } = \Big [ \dfrac{\chi^2}{N-1} \Big ]^{\frac{1}{2}}  } 
 \end{equation*}
-Per la t-student fissato un valore di soglia $t_0$, ci permette di determinare la compatibilit\`{a} tra il valore stimato e quello atteso, se $t>t_0$ allora le due misure risultano essere non compatibili tra loro. Dove gli intervalli di compatibilit\`{a} risultano essere in multipli di deviazioni standard.
-\begin{figure}[ht]
-\vspace{0.1in}
-\includegraphics[scale = 0.5]{Bellcurve}	
+\begin{wrapfigure}{r}{0.\textwidth}
+\includegraphics[scale = 0.3]{Bellcurve}	
 \centering
-\end{figure}
+\end{wrapfigure}
+Per la t-student fissato un valore di soglia $t_0$, ci permette di determinare la compatibilit\`{a} tra il valore stimato e quello atteso, se $t>t_0$ allora le due misure risultano essere non compatibili tra loro. Dove gli intervalli di compatibilit\`{a} risultano essere in multipli di deviazioni standard.
 
 \subsubsection{Confronto tra la stima di due parametri}
 
@@ -239,19 +277,19 @@ dove la pdf(z) \`{e} Gaussiana se $\sigma_1$ e $\sigma_2$ sono senza errore, men
 Ipotizziamo che lo stimatore $\hat{\theta}$ segue una distribuzione gaussiana G($\hat{\theta},\theta_t,\sigma$) determinato il suo valore $\theta^*$ ci domandiamo quale sia la probabilit\`{a} che tale valore disti $\sigma$ dal valore vero $\theta_t$, ovvero $P[\theta^* \in (\theta_t - \sigma, \theta_t + \sigma)]$ = 0,68. Essendo $\theta^*$ una variabile aleatoria dipendente dal campione mentre $\theta_t$ no, l'affermazione precedente non \`{e} corretta, in quanto $\theta_t$ non \`{e} una variabile aleatoria, per questo motivo riscriviamo l'intervallo di confidenza in $ \theta_t \in (\theta^* - \sigma,\theta^* + \sigma)$ e la probabilit\`{a} come $P[\theta_t \in (\theta^* - \sigma, \theta^* + \sigma)]$ = 0,68, determinando un 68 \% di confidenza nell'intercettare $\theta_t$ ripetendo l'esperimento.
 \begin{figure}[ht]
 \vspace{0.1in}
-\includegraphics[scale = 0.45]{intervaltheta}	
+\includegraphics[scale = 0.44]{intervaltheta}	
 \centering
 \end{figure}
 
 \subsection{Metodo della cintura di confidenza}
 
-Definiamo uno stimatore $\hat{\theta} \equiv \hat{\theta}(x)$, di un parametro $\theta$ rispetto ad un campione di N variabili aleatorie IID di una grandezza x, poich\`{e} lo stimatore dipende da variabili aleatorie anch'esso \`{e} una r.v. di conseguenza seguir\`{a} una distribuzione di probabilit\`{a} $f(\hat{\theta} \;\vert \; \theta)$. Per ciascun campione raccolto $\hat{\theta}$ definir\`{a} una stima $\theta^*$ del parametro, costruendo la pdf associata. Ripetendo l'esperimento con diversi campionamenti ciascuna distribuzione relativa  avr\`{a} un valore atteso $E[\hat{\theta}] = \theta_{t}^{i}$ e una varianza $V[\hat{\theta}] = \sigma_{\theta_{t}^i}^2$.\newline
-Per ciascun esperimento non conosciamo la forma analitica della pdf oppure non siamo in grado di definirla di conseguenza per stimare l'intervallo di confidenza di un certo valore di $\theta^*$ stimato usiamo il seguente metodo:
-\newline
+Definiamo uno stimatore $\hat{\theta} \equiv \hat{\theta}(x)$, di un parametro $\theta$ rispetto ad un campione di N variabili aleatorie IID di una grandezza x, poich\`{e} lo stimatore dipende da variabili aleatorie anch'esso \`{e} una r.v. di conseguenza seguir\`{a} una distribuzione di probabilit\`{a} $f(\hat{\theta} \;\vert \; \theta)$. Per ciascun campione raccolto $\hat{\theta}$ definir\`{a} una stima $\theta^*$ del parametro, costruendo la pdf associata. Ripetendo l'esperimento con diversi campionamenti ciascuna distribuzione relativa  avr\`{a} un valore atteso $E[\hat{\theta}] = \theta_{t}^{i}$ e una varianza $V[\hat{\theta}] = \sigma_{\theta_{t}^i}^2$.
 \begin{wrapfigure}{r}{0.\textwidth}
 \centering
 \includegraphics[scale = 0.4]{confidence}	
 \end{wrapfigure}
+Per ciascun esperimento non conosciamo la forma analitica della pdf oppure non siamo in grado di definirla di conseguenza per stimare l'intervallo di confidenza di un certo valore di $\theta^*$ stimato usiamo il seguente metodo:
+\newline
 $\bullet$ Per ogni valore di $\theta_{t}^i$ definiamo $pdf_i(\hat{\theta} \vert \theta_t$);\newline
 
 \noindent $\bullet$ Si determinano i punti della pdf($\hat{\theta} \vert \theta_t$) che definiscono un intervallo di confidenza per il $\theta_t$ corrispettivo;\newline
@@ -292,3 +330,26 @@ approssimabile alla distribuzione del $\chi^2(2n+2)$ con 2(n+1) g.d.l., ovvero l
 \end{equation*}
 Per $\beta \approx 1$ il p-value \`{e} molto piccolo e quindi possiamo rigettare la null hypothesis $H_0$ formulata all'inizio e quindi il segnale osservato \`{e} effettivamente un processo fisico. Un valore grande di $\beta$ ci dice che si ha un alta probabilit\`{a} che per valori pi\`{u} grandi di $n_b^0$ i fenomeni osservati siano composti per la maggior parte da rumore di fondo. Mentre per $1-\beta$ molto piccolo si ha una bassa probabilit\`{a} che quanto osservato sia dato da rumore di fondo.
 
+\section{Studio dei Residui e Pulls}
+
+\vspace{0.05cm}
+\par\noindent\rule{\textwidth}{2pt}
+
+\section{Capitolo 6 - Guida allo studio}
+
+\begin{enumerate}
+	\item Come funziona il test del chi quadrato per decidere la bont\`{a} di un fit?
+	\item Entro quali ipotesi il test funziona?
+	\item Che cosa \`{e} il p-value associato al test?	\item Quali sono le informazioni minime necessarie per poterlo calcolare?
+	\item Quali sono le limitazioni del test del chi2?
+	\item Che cosa sono gli errori di primo e di secondo tipo e come sono associati al test del chi2?
+	\item Che distribuzione attesa ha il p-value ottenuto dal test del chi2?
+	\item In quali circostanze si utilizza la distribuzione di t-Student per l'analisi dei dati?
+	\item In che cosa consiste il test di Kolmogorov?
+	\item In che cosa consiste il test di t-Student?
+	\item Che caratteristiche ha la distribuzione di t-Student e come si comporta al limite per il  numero di gradi di libert\`{a} che tende all'infinito?
+	\item Come si fa operativamente a disegnare la distribuzione di Kolmogorov?
+	\item Come si costruisce una confidence belt?
+	\item Come si può determinare la significativit\`{a} di scoperta di un segnale sovrapposto a rumore di fondo?
+
+\end{enumerate}

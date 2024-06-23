@@ -154,15 +154,14 @@ Date N variabili aleatorie $\{x_{i}\}_{i}^N$ indipendenti ed identicamente distr
 dunque si ha che la pdf delle medie campionarie di un campione che cresce converge alla distribuzione Gaussiana.
 
 
-\subsubsection{Conseguenze del TCL}
+\subsection{Conseguenze del TCL}
 
- Quando effettuiamo una misura in un esperimento in generale possiamo definirla come la somma del valore vero $x_0$ e di un errore $\epsilon$ che \`{e} una variabile aleatoria.
+ Quando effettuiamo una misura in un esperimento in generale possiamo definirla come la somma del valore vero $x_0$ e di un errore $\epsilon$ che \`{e} una variabile aleatoria. 
  
  \begin{equation*}
  	x = x_0 + \epsilon
  \end{equation*}
-
-la misura cos\`{i} ottenuta segue una pdf(x), il che equivale a dire che segue la pdf($\epsilon$). Ipotizziamo di effettuare pi\`{u} misure di una stessa variabile aleatoria e di volerne calcolare la media, in realt\`{a} la media che calcoliamo \`{e} quella degli errori $\epsilon$, assummendo che $V[\epsilon_i] < \infty$ e $E[\epsilon_i] < \infty$ e che le $\{\epsilon_i\}_{i}^N$ siano indipendenti tra loro, possiamo applicare il TCL e dunque la  pdf($\overline{\epsilon}$) $\rightarrow$ G($\overline{\epsilon}$,$\mu$,$\frac{\sigma}{\sqrt{N}}$). Quindi l'errore medio delle misurazioni di un esperimento segue una distribuzione di probabilit\`{a} Gaussiana.
+La maggior parte delle misure che si effettuano sono la somma di variabili aleatorie, come per esempio errori intriseci ed errori sperimentali. Per esempio quando misuriamo un oggetto con un metro, inseriamo all'interno della misura degli errori, che possono dipendere sia dalle condizioni sperimentali che dall'operatore (Diottrie, stabilit\'{a} del polso, ecc...), tali errori si sommano tra loro. Il teorema centrale del limite risulta essere importante perch\'{e} ci dice che la somma di tali errori al crescere della dimensione del campione segue una distribuzione di probabilit\'{a} Gaussiana, permettendoci di applicare alcuni metodi statistici per la stima dei parametri e garantendo delle propriet\'{a} significative alla stima.
 
 \section{Distribuzione di probabilit\`{a} Log-normale}
 

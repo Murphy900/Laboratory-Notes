@@ -495,7 +495,7 @@ Vogliamo determinare $\alpha^2$ affinch\`{e} $\hat{Q}_{min}^{2} = E[\hat{Q^2}] =
 \noindent Il fattore di scala cos\`{i} determinato non costituisce la sovrastima "reale" di cui si sono sbagliate le misure, poich\`{e} $\hat{Q^2}_{min}(\underline{x},\underline{\hat{\theta}}_{MQ})$ per $\underline{\hat{\theta}}_{MQ}$ fissato \`{e} anch'esso una variabile aleatoria  che segue la distribuzione di $\chi^2(N-K)$ di conseguenza la (5.26) stima un solo valore rispetto al campione a disposizione, ma $\alpha^2$ \`{e} una variabile aleatoria che segue la medesima distribuzione di $\hat{Q^2}_{min}(\underline{x},\underline{\hat{\theta}}_{MQ})$ e dunque per determinarlo bisogna ricostruire la distribuzione del $\chi^2$.
 
 \section{Teorema di Gauss-Markov}
-Si consideri un insieme di variabili aleatorie statisticamente indipendenti $\{(x_i,y_i)\}_i^N$ tali che sono legate tra loro da una relazione lineare rispetto ai parametri $y_i = \psi(x_i ,\underline{\theta}) + \epsilon_i$ dove $E[\epsilon_i] = 0$ e $V[\epsilon_i] $ finita $\forall i$ (propriet\`{a} di \textbf{omoschedasticit\`{a}}) ed inoltre $y_i$ indipendenti dai parametri $\underline{\theta} \Rightarrow$ si ha che lo stimatore $\underline{\hat{\theta}}$ ottenuto con il metodo dei minimi quadrati \`{e} non distorto e ha varianza minima fra tutti gli stimatori lineari.
+Si consideri un insieme di variabili aleatorie statisticamente indipendenti $\{(x_i,y_i)\}_i^N$ tali che sono legate tra loro da una relazione lineare rispetto ai parametri $y_i = \psi(x_i ,\underline{\theta}) + \epsilon_i$ dove $E[\epsilon_i] = 0$ e $V[\epsilon_i] $ finita $\forall i$ (propriet\`{a} di \textbf{omoschedasticit\`{a}}) ed indipendente dai parametri $\underline{\theta}$ e dalle misure $y_i$ $\Rightarrow$ si ha che lo stimatore $\underline{\hat{\theta}}$ ottenuto con il metodo dei minimi quadrati \`{e} non distorto e ha varianza minima fra tutti gli stimatori lineari.
 
 \subsubsection{Osservazioni}
 
@@ -622,11 +622,11 @@ Applichiamo il metodo dei minimi quadrati confrontando i conteggi dell'istogramm
 \end{equation*}
 Scrivendo il funzionale $Q^2$ come:
 \begin{equation*}
-Q^2 = \sum_{i=1}^N\dfrac{(n_i - E[n_i])^2)}{V[n_i]}	 = \sum_{i=1}^N\dfrac{(n_i - Np_i(\vec{\theta}))^2)}{Np_i(\vec{\theta})} 
+Q^2 = \sum_{i=1}^K\dfrac{(n_i - E[n_i])^2)}{V[n_i]}	 = \sum_{i=1}^K\dfrac{(n_i - Np_i(\vec{\theta}))^2)}{Np_i(\vec{\theta})} 
 \end{equation*}
-Assumendo che i conteggi $n_i$ seguano una pdf Poiss$(n_i,\mu_i)$ (la discussione che segue risulterebbe verificata ugualmente anche se le pdf fossero binomiali). Per $n_i \rightarrow \infty$ possiamo approssimare la poissoniana a una gaussiana con valore atteso e varianza pari a $\mu_i$ di conseguenza $Q^2$ dipendendo da variabili aleatorie distribuite secondo una gaussiana, ed essendo lui stesso una variabile casuale si ha che segue la distribuzioni di $\chi^2(k-s)$ dove s \`{e} il numero di parametri. Definiamo dunque il $\chi^2$ nella forma di \textbf{Neyman}:
+Assumendo che i conteggi $n_i$ seguano una pdf Poiss$(n_i,\mu_i)$ (la discussione che segue risulterebbe verificata ugualmente anche se le pdf fossero binomiali). Per $Np_i \rightarrow \infty$ possiamo approssimare la poissoniana a una gaussiana con valore atteso e varianza pari a $\mu_i$, di conseguenza $Q^2$ dipendende da variabili aleatorie distribuite secondo una gaussiana, ed essendo lui stesso una variabile casuale si ha che segue la distribuzioni di $\chi^2(K-s)$ dove s \`{e} il numero di parametri. Definiamo dunque il $\chi^2$ nella forma di \textbf{Neyman}:
 \begin{equation}
-	\chi^2_{Neyman} = \sum_{i=1}^N\dfrac{(n_i - \mu_i(\vec{\theta})^2)}{n_i} = \sum_{i=1}^N\dfrac{(O_i - E_i)^2}{O_i}
+	\chi^2_{Neyman} = \sum_{i=1}^K\dfrac{(n_i - \mu_i(\vec{\theta})^2)}{n_i} = \sum_{i=1}^K\dfrac{(O_i - E_i)^2}{O_i}
 \end{equation} 
 Dove per $n_i$ grande si \`{e} approssimata la $V[n_i] \approx n_i$. La necessit\`{a} di approssimare i dati a una Gaussiana e la varianza al numero di conteggi di un bin, \`{e} determinata dal fatto che cos\`{i} facendo il teorema di Gauss-Markov risulta soddisfatto poich\`{e} tra le ipotesi \`{e} necessario che i momenti non dipendano dai parametri. In conclusione si procede a minimizzare il $\chi^2_{Neyman}$ per determinare i parametri $\vec{\theta}$.
 
@@ -636,7 +636,7 @@ La procedura di fit di un istogramma con il metodo del $\chi^2$ di Neyman preved
 \begin{itemize}
 	\item verificare che sia rispetta l'ipotesi pdf($n_i$) gaussiana;
 	\item associare a $n_i$ un errore $\sqrt{n_i}$
-	\item calcolare per ogni valore del parametro $\theta_i$ i valori attesi $\mu_i$ dei conteggi in ciascun bin;
+	\item calcolare i valori attesi $\mu_i$ dei conteggi in ciascun bin;
 	\item minimizzare il $\chi^2_{Neyman}$ trovando il valore di $\theta$ per cui l'accordo valori misurati - valori attesi \`{e} il migliore;
 	\item all'occorrenza effettuare un test del $\chi^2$
 	\end{itemize}
@@ -653,8 +653,18 @@ e si procede a massimizzare la funzione di likelihood:
 \begin{equation*}
 	\dfrac{\partial L(\vec{n},\vec{\theta})}{\partial \theta_j}= 0 \quad \quad \forall j=1,...,k
 \end{equation*}
-Ad un bin-size deve essere associata una probabilit\`{a} $p_{i}(\vec{\theta})$ piccola. Non \`{e} necessario che i bin abbiano tutti la stessa dimensione, possiamo sceglierle in modo che $N \cdot p_i$ sia grande e quindi valga l'approssimazione Gaussiana.\newline
+\newline
+Se gli eventi seguono una distribuzione di Poisson (N la dimensione del campione non \'{e} fissata )si ha che:
+\begin{equation*}
+	L(n_1,.....,n_k, \theta) = \prod_{i =1}^K \dfrac{\mu_i^{n_i}}{n_i!}e^{\mu_i}
+\end{equation*}
+dove
+\begin{equation*}
+	\mu_i = \dfrac{\mu^N}{N!}e^{\mu} \cdot p_i(\theta) = \dfrac{\mu^N}{N!}e^{\mu} \cdot \int_{w_j} pdf(x,\theta)dx 
+\end{equation*}
 
+\subsubsection{Osservazioni}
+Ad un bin-size deve essere associata una probabilit\`{a} $p_{i}(\vec{\theta})$ piccola. Non \`{e} necessario che i bin abbiano tutti la stessa dimensione, possiamo sceglierle in modo che $N \cdot p_i$ sia grande e quindi valga l'approssimazione Gaussiana.\newline
 L'operazione di binning, fa perdere informazione, questo si pu\`{o} riflettere sull'incertezza del parametro stimato , ma anche sulla capacit\`{a} di verificare che i dati siano ben descritti dal modello. In questi casi \`{e} utili studiare la dipendenza del risultato dal binning.
 
 

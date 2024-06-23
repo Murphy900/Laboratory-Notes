@@ -53,7 +53,7 @@ Introduciamo una nuova quantit\`{a} definita \textbf{p-value} che ha la seguente
   \end{minipage}
 \vspace{0.2in}
 
-\noindent la quantit\`{a} cos\`{i} definita risulta essere una misura di probabilit\`{a}. Per rispondere alla domanda precedente fissiamo una soglia di tolleranza del p-value oltre alla quale i valori ottenuti risultano essere dei \textbf{falsi negativi}. Riprendendo i modelli $H_0$ e $H_1$ che definiamo rispettivamente \textbf{null hypothesis} e \textbf{alternative hypothesis} poich\`{e} $H_1$ ha un valore di aspettazione pi\`{u} grande di $H_0$, fissata una soglia del p-value, e definita una statistica x associata al $\chi^2(x \vert N-k)$ avremo che:
+\noindent la quantit\`{a} cos\`{i} definita risulta essere una misura di probabilit\`{a}. Per rispondere alla domanda precedente fissiamo una soglia di tolleranza del p-value oltre alla quale i valori ottenuti risultano essere dei \textbf{falsi negativi}. Riprendendo i modelli $H_0$ e $H_1$ che definiamo rispettivamente \textbf{null hypothesis} e \textbf{alternative hypothesis}, fissata una soglia del p-value, e definita una statistica x associata (come per esempio il $Q^2$) al $\chi^2(x \vert N-k)$ avremo che:
 \begin{itemize}
 	\item H0 \`{e} rigettata se x cade nella regione in azzurro $\omega_\alpha^* $ in figura 6.2
 	\item H0 \`{e} accettata se x cade nella regione in verde $\omega_\alpha$ nella figura sottostante.
@@ -62,16 +62,18 @@ Introduciamo una nuova quantit\`{a} definita \textbf{p-value} che ha la seguente
 \includegraphics[scale = 0.4]{hypo}	
 \centering
 \end{figure}
-Su quanto discusso fino ad ora possiamo fare le seguenti osservazioni:
+Dunque date due ipotesi $H_0$ e $H_1$ decidiamo di considerare affermativa quella che restituisce il valore del p-value pi\'{u} alto (ovvero quella con probabilit\'{a} maggiore) rispetto al valore $p_0$ di soglia considerato, apparentemente sembrerebbe sufficiente per concludere quale delle due ipotesi sia verifica, ma in realt\'{a} come si vedr\'{a} nelle sezioni succesive la realt\'{a} sperimentale \'{e} pi\'{u} complicata e posso esserci casi di falso positivi.
+
+\noindent Su quanto discusso fino ad ora possiamo fare le seguenti osservazioni:
 \begin{itemize}
-	\item I minimi quadrati calcolano il $Q^2$ (e anche la ML calcola i parametri $\hat{\theta}$ da cui si può calcolare il $Q^2$);
-	\item Test del $\chi^2$ funziona perché conosciamo la p.d.f. del $Q^2 \Rightarrow \sigma^2$  deve essere nota e ben stimata;
-	\item Test del $\chi^2$ è un test integrale $\Rightarrow$ Somma gli scarti su tutti gli eventi.
+	\item I minimi quadrati permettono di calcolare il $Q^2$ (e anche il metodo di ML calcola i parametri $\hat{\theta}$ da cui si può calcolare il $Q^2$);
+	\item Il test del $\chi^2$ \'{e} applicabile se sappiamo calcolare il valore del $Q^2 \Rightarrow \sigma^2$  deve essere nota e ben stimata;
+	\item Test del $\chi^2$ è un test integrale $\Rightarrow$ Somma gli scarti su tutti gli eventi, e dunque pu\'{o} presentare delle limitazioni (esempio sotto).
 \end{itemize}
 
 \subsubsection{Esempio}
 
-\begin{wrapfigure}{l}{0.\textwidth}
+\begin{wrapfigure}[18]{l}{0.\textwidth}
 \centering
 \includegraphics[scale = 0.5]{esempio}	
 \end{wrapfigure}
@@ -88,13 +90,16 @@ misure, il test non lo tiene in considerazione.
 Se consideriamo una dispersione delle misure come nella terza figura e
 assumiamo che abbia il medesimo p-value delle altre due, si ha
 che il test non considera che i dati diminuiscono di valore lungo l'asse delle ordinate e dunque si ottiene un \textbf{falso positivo}, ovvero p-value \`{e} verificato, ma il modello non descrive adeguatamente il comportamento dei dati sperimentali.
-
 Il fatto che il test del $\chi^2$ abbia forma integrale limita la generalit\`{a} con cui possiamo decidere se il risultato ottenuto sia affidabile o meno.
+\newline
+\newline
+\textbf{Definizione di Overfitting}
 
 \begin{wrapfigure}{r}{0.\textwidth}
 \centering
 \includegraphics[scale = 0.5]{overfit}	
 \end{wrapfigure}
+\vspace{0.05in}
 
 \noindent Ipotizziamo di avere un fit che ha $Q^2$ = 0 e p-value-1,
 ovvero i dati vengono interpolati perfettamente , questo non è
@@ -105,11 +110,25 @@ capacit\`{a} di generalizzare il modello.
 \subsection{Applicazione del test di $\chi^2$}
 
 Se il modello \`{e} corretto $y = \psi(x,\vec{\theta})$, allora il metodo dei MQ fornisce una stima dei parametri $\vec{\theta}$ che lo descrivono. Il valore stimato dei parametri rappresenta il punto di minimo del funzione di $Q^2_{min} = Q^2(x,\vec{\theta}_{MQ})$ rispetto al campione sperimentale, tale punto di minimo coincide anche con il massimo della distribuzione di $\chi^2$ se pdf($\epsilon$) seguono una distribuzione gaussiana, che \`{e} dato da $E[Q^2] = N-k$ e quindi $Q^2_{min} = N-k$. \newline
-Il $\chi^2$ ridotto \`{e} definito come $\chi^2_{0} = \frac{\chi^2}{ndof}$ ci\`{o} implica che per $\chi^2_{min} = Q^2_{min}$ il ridotto \`{e} $\chi^2_0 \sim 1$. \newline
-Se il valore del $\chi^2_{min}$ \`{e} lontano dal suo valore di aspettazione N-k, possiamo concludere che alcune delle ipotesi precedenti non sia corrette e dunque \textbf{i dati non confermano il modello}.
+Il $\chi^2$ ridotto \`{e} definito come $\chi^2_{0} = \frac{\chi^2}{N-k}$ ci\`{o} implica che per $\chi^2 = Q^2_{min}$ il ridotto \`{e} $\chi^2_0 \sim 1$. \newline
+Se il valore del $\chi^2$ \`{e} lontano dal suo valore di aspettazione N-k (o 1 nel caso si usi quello ridotto), possiamo concludere che alcune delle ipotesi precedenti non sia corrette e dunque \textbf{i dati non confermano il modello}. 
 
+\noindent Le regioni a bassi valori di $\chi^2$ corrispondono a scarti tra modello e dati molto piccoli, quindi a casi di overfitting. Tali risultati sono altamente imporbabili. Tali risultati possono essere dovuti sovrastime degli errorri, la pdf non \'{e} Gaussiana o se le incertezze considerate non hanno solo incertezze di tipo statistico. 
+
+\begin{figure}[ht]
+\vspace{0.1in}
+\includegraphics[scale =0.4]{testchi}	
+\centering
+\caption{Overfitting}
+\end{figure}
 \section{Errori di test statistici}
 
+Quanto discusso in questa sezione fa riferimento al test del $\chi^2$, ma generalizzabile a qualsiasi statistica $\beta$ per cui \'{e} possibile definire due distribzioni di probabilit\'{a}:
+
+\begin{itemize}
+	\item $pdf(\beta \vert H_0)$ = \textbf{Null Hypothesis 
+	\item $pdf(\beta \vert H_1)$ = \textbf{Alternative Hyp}othesis}
+\end{itemize}
 \subsection{Errori del $I^{\circ}$ tipo}
 
 Un errore del primo tipo rappresenta il numero di casi veri per la null hypothesis Ho che scartiamo fissata una soglia del p-value.
@@ -196,7 +215,7 @@ Tale metodo non parametrico \`{e} anche utile per confrontare due campioni di da
  
  \section{Confronto di una misura con il valore di riferimento}
  
- \subsection{Distribuzione di t-student}
+ \subsection{Distribuzione t-student}
  Si consideri un campione di N misure di cui si \`{e} calcolata la media campionaria $\overline{x} = \frac{1}{N} \sum x_i$ e si supponga di conoscere $\sigma_i$ delle singole misure e $E[x] = \mu$, allora la media aritmetica $\overline{x}$ \`{e} per il TCL \`{e} distribuita come una gaussian G($\overline{x}$,$\mu$, $\frac{\sigma}{\sqrt{N}}$). Come facciamo a dire che $\overline{x}$ e ${\mu}$ sono sufficientemente vicine tra loro rispetto alle incertezze ?
  \newline
  Per determinare la distanza tra le grandezze definiamo la distribuzione t-student data dalla variabile aleatoria:
