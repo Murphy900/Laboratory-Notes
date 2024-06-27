@@ -15,7 +15,7 @@ Date N misure  $\{x_{i}\}_{i}^N$ IID la funzione di probabilit\`{a} congiunta (j
 \noindent Se si sostituisce al valore vero $\underline{\theta_{t}}$ il generico valore $\underline{\hat{\theta}}$ stimato dalle N misure e se esse vengono considerate non pi\`{u} variabili casuali, ma costanti che sono state determinate dalle operazioni di misura, la precedente funzione prende il nome di \textit{funzione di verosomiglianza} o \textbf{likelihood}.
 
 \begin{equation*}
-		 L(\underline{x},\underline{\hat{\theta}}) = \prod_{i}^N pdf_{x}(x_i,\underline{\hat{\theta}}) 
+		 L(\underline{\hat{\theta}}) = \prod_{i}^N pdf_{x}(x_i,\underline{\hat{\theta}}) 
 \end{equation*}
 al variare di $\underline{\hat{\theta}}$ tale funzione ci descrive l'evoluzione della densit\`{a} di probabilit\'{a} del medesimo set di misure rispetto a pdf differenti tra loro.
 
@@ -85,7 +85,7 @@ La funzione di likelihood $L(\theta)$ pu\`{o} essere utilizzata per misurare l'i
 Vogliamo costruire una metrica $I ( \theta)$ che fornisca l'ammontare d'informazione contenuta in una variabile casuale osservabile x, relativamente a un parametro non osservabile $\theta$, da cui dipende la pdf(x,$ \underline{\theta}$). Tale funzione  prende il nome d'\textbf{informazione di Fischer}.
 
 \begin{equation*}
-		I(\theta) = E[(\frac{\partial}{\partial \theta}log(L(\theta)))^2] = -E[\frac{\partial^2}{\partial\theta^2}log(L(\theta)]
+		I(\theta) = E[(\frac{\partial}{\partial \theta}log(L(\theta)))^2] = -E[\frac{\partial^2}{\partial\theta^2}log(L(\theta))]
 \end{equation*}
 
 \noindent essa gode delle seguenti propriet\`{a}:
@@ -173,10 +173,10 @@ Espandiamo fino al secondo ordine con un polinomio di Taylor la loglikelihood in
 \noindent Se assumiamo che lo stimatore sia unbiased (il che per le propriet\`{a} precedente asintoticamente pu\`{o} esserlo) ed efficiente si ha dal teorema di Rao-Cramer che il secondo addendo \`{e} equivalente a:
 
 \begin{equation*}
-		\frac{d^2}{d\theta^2}(log(L(\theta))\vert_{\theta = \hat{\theta}} = - \frac{1}{\sigma_{\hat{\theta}_{ML}}}
+		\frac{d^2}{d\theta^2}log(L(\theta))\vert_{\theta = \hat{\theta}} = - \frac{1}{\sigma_{\hat{\theta}_{ML}}}
 \end{equation*}
 
-\noindent E dunque possiamo riscrivere l'equazione (8.6) come:
+\noindent E dunque possiamo riscrivere l'equazione (5.4) come:
 
 
 \begin{equation}
@@ -189,7 +189,7 @@ Espandiamo fino al secondo ordine con un polinomio di Taylor la loglikelihood in
 	log(L(\hat{\theta}\pm \sigma_{\hat{\theta}}) = log(L(\hat{\theta})) - \frac{1}{2}
 \end{equation}
 
-\noindent dunque da tale cambio di variabile si ha che la loglikelihood diminuisce della met\`{a} del suo valore di massimo. Si pu\`{o} dimostrare che la funzione di loglikelihood diventa una parabola (e la funzione di likelihood diventa una Gaussiana) per valori grandi del campione. Anche se la log(L) non \`{e} parabolica si pu\`{o} utilizzare l'equazione (8.8) come la definizione di errore statistico. Determinando i punti d'intersezione con quanto definito in (8.8) si ottiene una stima della varianza dello stimatore $\hat{\theta}$ usando il metodo di ML.
+\noindent dunque da tale cambio di variabile si ha che la loglikelihood diminuisce della met\`{a} del suo valore di massimo. Si pu\`{o} dimostrare che la funzione di loglikelihood diventa una parabola (e la funzione di likelihood diventa una Gaussiana) per valori grandi del campione. Anche se la log(L) non \`{e} parabolica si pu\`{o} utilizzare l'equazione (5.6) come la definizione di errore statistico. Determinando i punti d'intersezione con quanto definito in (5.6) si ottiene una stima della varianza dello stimatore $\hat{\theta}$ usando il metodo di ML.
 
  
 \begin{figure}[!ht]
@@ -232,7 +232,7 @@ Un esempio sperimentale \'{e} dato da un fascio di particelle cariche la cui per
 La varianza di $V[\hat{\theta}]$ di un vettore di parametri \`{e} definita dalla matrice di covarianza dove le sue componenti sono date da:
 
 \begin{equation}
-	V_{ij} = \Big[ - \dfrac{\partial^2}{\partial \theta_i \partial \theta_j}l(\hat{\theta}) \Big]^{-1} \quad \text{per} \quad i,j = 1,...,n
+	V_{ij} = \Big[ - \dfrac{\partial^2}{\partial \theta_i \partial \theta_j}log(L(\hat{\theta})) \Big]^{-1} \quad \text{per} \quad i,j = 1,...,n
 \end{equation}
 dove i termini per $i \neq j$ sono dati da $Cov[\theta_i,\theta_j]$.
 
@@ -284,7 +284,7 @@ L'incertezza \`{e} dominata dalle misure con le $\sigma_{i}$ pi\`{u} piccole.
 
 \section{Varianza di un stimatore usando i MQ - Metodo grafico}
 
-Con il metodo di maximum likelihood si sono cercati i valori dei parametri che rendevano massima la probabilit\`{a}, dato un modello, di osservare i dati campionati. Con il metodo dei minimi quadrati invece si ceca il valore dei parametri che rende minima la distanza tra i dati campionati e il modello. Quando le $pdf(x_i)$ sono Gaussiane i due stimatori coincidono.
+Con il metodo di maximum likelihood si sono cercati i valori dei parametri che rendevano massima la probabilit\`{a}, dato un modello, di osservare i dati campionati. Con il metodo dei minimi quadrati invece si cerca il valore dei parametri che rende minima la distanza tra i dati campionati e il modello. Quando le $pdf(x_i)$ sono Gaussiane i due stimatori coincidono.
 
 \begin{equation*}
 	L(\hat{\theta}) = \prod_{i=1}^N \dfrac{1}{\sqrt{2\pi}\sigma_i}\exp{\Big [-\frac{ (x_i-\hat{\theta})^2}{2 \sigma_i^2} \Big]} = cost \cdot e^{-\frac{Q^2}{2}}
@@ -299,12 +299,12 @@ Stimando $\hat{\theta}$ con il metodo di Maximum Likelihood si ha
 \begin{equation}
 	\dfrac{\partial \log(L(\hat{\theta}))}{\partial \hat{\theta}} = - \dfrac{1}{2}\dfrac{\partial Q^2(\hat{\theta})}{\partial \hat{\theta}}
 \end{equation}
-Quandole misure seguono una pdf Gaussiana e lo stimatore $\hat{\theta}$ \`{e} efficiente e non distorto sappiamo che il MVB coincide con la varianza dello stimatore ottenuto con il metodo di ML.
+Quando le misure seguono una pdf Gaussiana (e quindi anche gli errori $\epsilon$ e lo stimatore $\hat{\theta}$ \`{e} efficiente e non distorto sappiamo che il MVB coincide con la varianza dello stimatore ottenuto con il metodo di ML.
 
 \begin{equation}
 	V[\hat{\theta}_{ML}] = - \dfrac{1}{\dfrac{\partial^2 \log(L(\theta))}{\partial \theta^2} \Big \vert_{\theta = \hat{\theta}_{ML}}} 
 \end{equation}
-Dalla relazione (5.12) possiamo riscrivere l'uguaglianza (5.13) come:
+Dalla relazione (5.11) possiamo riscrivere l'uguaglianza (5.12) come:
 
 \begin{equation}
 	V[\hat{\theta}_{MQ}] = \dfrac{2}{\dfrac{\partial^2Q^2(\theta)}{\partial \theta^2} \Big \vert_{\theta = \hat{\theta}_{MQ}}}
@@ -323,7 +323,7 @@ Effettuando un cambio di coordinate $\theta = \hat{\theta}_{MQ} \pm \sigma_{\hat
 \includegraphics[width = 0.6 \textwidth]{graph}	
 \end{wrapfigure}
 \newline
-Dunque considerando graficamente l'intersezione con $Q^2(\theta)$ si determinano $\hat{\theta}_{MQ} \pm \sigma_{\hat{\theta}}$. Poich\`{e} per ipotesi le misure $\{x_i\}_i^N$ seguono una distribuzione di probabilit\`{a} Gaussiana e sono IID si ha che $Q^2(\theta)$ segue la distribuzione di probabilit\`{a} del chi quadro $\chi^1(N-k)$ per E[$Q^2$] = N-k gradi di libert\`{a}. Se questo non avviene \`{e} perch\`{e}:
+Dunque considerando graficamente l'intersezione con $Q^2(\theta)$ si determinano $\hat{\theta}_{MQ} \pm \sigma_{\hat{\theta}}$. Poich\`{e} per ipotesi le misure $\{x_i\}_i^N$ seguono una distribuzione di probabilit\`{a} Gaussiana e sono IID si ha che $Q^2(\theta)$ segue la distribuzione di probabilit\`{a} del chi quadro $\chi^2(N-k)$ per E[$Q^2$] = N-k gradi di libert\`{a}. Se questo non avviene \`{e} perch\`{e}:
 \begin{itemize}
 	\item si \`{e} avuta una fluttuazione statistica sfavorevole
 	\item il modello non descrive i dati
@@ -331,7 +331,7 @@ Dunque considerando graficamente l'intersezione con $Q^2(\theta)$ si determinano
 	\item il modello \`{e} corretto, ma le incertezze attribuite ai dati sono sbagliate (sono sopra o sottovalutate).
 \end{itemize}
 
-\section{Modelli lineari nei parametri}
+\section{Modelli lineari nei parametri - Regressione Lineare}
 
 Un modello si definisce \textbf{lineare} se due grandezza fisiche x ed y sono legate da una relazione lineare rispetto a parametr $\underline{\theta}$.
 
@@ -469,7 +469,7 @@ Vogliamo determinare $\alpha^2$ affinch\`{e} $\hat{Q}_{min}^{2} = E[\hat{Q^2}] =
 
 \end{wrapfigure}
 
-\noindent Il fattore di scala cos\`{i} determinato non costituisce la sovrastima "reale" di cui si sono sbagliate le misure, poich\`{e} $\hat{Q^2}_{min}(\underline{x},\underline{\hat{\theta}}_{MQ})$ per $\underline{\hat{\theta}}_{MQ}$ fissato \`{e} anch'esso una variabile aleatoria  che segue la distribuzione di $\chi^2(N-K)$ di conseguenza la (5.26) stima un solo valore rispetto al campione a disposizione, ma $\alpha^2$ \`{e} una variabile aleatoria che segue la medesima distribuzione di $\hat{Q^2}_{min}(\underline{x},\underline{\hat{\theta}}_{MQ})$ e dunque per determinarlo bisogna ricostruire la distribuzione del $\chi^2$.
+\noindent Il fattore di scala cos\`{i} determinato non costituisce la sovrastima "reale" di cui si sono sbagliate le misure, poich\`{e} $\hat{Q^2}_{min}(\underline{x},\underline{\hat{\theta}}_{MQ})$ per $\underline{\hat{\theta}}_{MQ}$ fissato \`{e} anch'esso una variabile aleatoria  che segue la distribuzione di $\chi^2(N-K)$ di conseguenza la (5.25) stima un solo valore rispetto al campione a disposizione, ma $\alpha^2$ \`{e} una variabile aleatoria che segue la medesima distribuzione di $\hat{Q^2}_{min}(\underline{x},\underline{\hat{\theta}}_{MQ})$ e dunque per determinarlo bisogna ricostruire la distribuzione del $\chi^2$.
 
 \section{Teorema di Gauss-Markov}
 Si consideri un insieme di variabili aleatorie statisticamente indipendenti $\{(x_i,y_i)\}_i^N$ tali che sono legate tra loro da una relazione lineare rispetto ai parametri $y_i = \psi(x_i ,\underline{\theta}) + \epsilon_i$ dove $E[\epsilon_i] = 0$ e $V[\epsilon_i] $ finita $\forall i$ (propriet\`{a} di \textbf{omoschedasticit\`{a}}) ed indipendente dai parametri $\underline{\theta}$ e dalle misure $y_i$ $\Rightarrow$ si ha che lo stimatore $\underline{\hat{\theta}}$ ottenuto con il metodo dei minimi quadrati \`{e} non distorto e ha varianza minima fra tutti gli stimatori lineari.
@@ -566,7 +566,7 @@ Pi\`{u} $x_0$ si allontana da $\overline{x}$ pi\`{u} \`{e} grande la varianza su
 \section{Fit d'istogrammi}
 \begin{wrapfigure}{l}{0.\textwidth}
 \centering
-\includegraphics[scale = 0.3]{BinnedData}	
+\includegraphics[scale = 0.25]{BinnedData}	
 \end{wrapfigure}
 Consideriamo un insieme di N misure $\{x_{i}\}_i^N$ IID che seguono la pdf $f(x_i,\vec{\theta}): \Omega \subseteq \mathbb{R} \rightarrow \mathbb{R}$, raccogliamo i dati in modo da dividere l'asse reale in k intervalli $\omega_j = [x_i,x_{i+1})$. tali che $\omega_j \cap \omega_i = \varnothing \quad \forall i,j$ e $\bigcup_{j=1}^k \omega_j = \Omega$. Tali intervalli vengono defini 'bin', per ciascuno di essi contiamo il numero di misure $n_j$ che cadono all'interno dell'intervallo. Complessivamente avremo che $\sum_{j=1}^N n_j = N$ numero totale di misure. Poich\`{e} le misure sono IID a ciascuna bin associamo una probabilit\`{a}:
 \begin{equation*}
@@ -575,13 +575,13 @@ Consideriamo un insieme di N misure $\{x_{i}\}_i^N$ IID che seguono la pdf $f(x_
 
 \begin{wrapfigure}{r}{0.\textwidth}
 \centering
-\includegraphics[scale = 0.34]{expbin}	
+\includegraphics[scale = 0.3]{expbin}	
 \end{wrapfigure}
 Partendo dalla probabilit\`{a} associata a ciascun bin $\omega_j$ costruiamo un istogramma i cui conteggi attesi sono dati da $ E[n_{j}] = N \cdot p_j(\vec{\theta})$. Le misure di conteggio dell'istogramma definito dai dati del campione seguono una joint-pdf $pdf(n_1,...,n_k,p_1,...p_k)$ che definisce una distribuzione multinomiale. Per $p \rightarrow 0 $ le misure di conteggio sono statisticamente indipendenti tra loro di conseguenza la multinomiale pu\`{o} essere riscritta come prodotto di distribuzioni di probabilit\`{a} binomiali.
 \begin{equation*}
-	pdf(n_1,...,n_k,p_1,...,p_k) = \prod_{i=1}^kpdf(n_i,p_i)
+	pdf(n_1,...,n_k,p_1,...,p_k) = \prod_{i=1}^k pdf(n_i,p_i)
 \end{equation*}
-Nel caso in cui il valore di aspettano del conteggio dei bin sia costante possiamo approssimare le singole pdf binomiali come delle Poissoniane dove $\lambda_{i}(\vec{\theta}) = N * p_i(\vec{\theta})$ rappresenta la frequenza media di eventi della distribuzione di Poisson di conseguenza la joint-pdf diventa :
+Nel caso in cui il valore di aspettazione del conteggio dei bin sia costante al crescere delle numero delle misure, possiamo approssimare le singole pdf binomiali come delle Poissoniane dove $\lambda_{i}(\vec{\theta}) = N * p_i(\vec{\theta})$ rappresenta la frequenza media di eventi per bin della distribuzione di Poisson, di conseguenza la joint-pdf diventa :
 \begin{equation*}
 	\prod_{i=1}^kpdf(n_i,p_i) = \prod_{i=1}^k \dfrac{\lambda_i(\vec{\theta})^{n_{i}}}{n_{i}!}e^{-\lambda_{i}} = L(n_1,...,n_k,\theta)
 \end{equation*}
@@ -644,7 +644,7 @@ dove
 Ad un bin-size deve essere associata una probabilit\`{a} $p_{i}(\vec{\theta})$ piccola. Non \`{e} necessario che i bin abbiano tutti la stessa dimensione, possiamo sceglierle in modo che $N \cdot p_i$ sia grande e quindi valga l'approssimazione Gaussiana.\newline
 L'operazione di binning, fa perdere informazione, questo si pu\`{o} riflettere sull'incertezza del parametro stimato , ma anche sulla capacit\`{a} di verificare che i dati siano ben descritti dal modello. In questi casi \`{e} utili studiare la dipendenza del risultato dal binning.
 
-\vspace{0.05cm}
+\vspace{0.5cm}
 \par\noindent\rule{\textwidth}{2pt}
 
 \section{Capitolo 5 - Guida allo studio}
