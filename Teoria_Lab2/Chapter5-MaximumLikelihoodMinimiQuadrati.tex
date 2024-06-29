@@ -605,7 +605,7 @@ Assumendo che i conteggi $n_i$ seguano una pdf Poiss$(n_i,\mu_i)$ (la discussion
 \begin{equation}
 	\chi^2_{Neyman} = \sum_{i=1}^K\dfrac{(n_i - \mu_i(\vec{\theta})^2)}{n_i} = \sum_{i=1}^K\dfrac{(O_i - E_i)^2}{O_i}
 \end{equation} 
-Dove per $n_i$ grande si \`{e} approssimata la $V[n_i] \approx n_i$. La necessit\`{a} di approssimare i dati a una Gaussiana e la varianza al numero di conteggi di un bin, \`{e} determinata dal fatto che cos\`{i} facendo il teorema di Gauss-Markov risulta soddisfatto poich\`{e} tra le ipotesi \`{e} necessario che i momenti non dipendano dai parametri. In conclusione si procede a minimizzare il $\chi^2_{Neyman}$ per determinare i parametri $\vec{\theta}$.
+Dove per $n_i$ grande si \`{e} approssimata la $V[n_i] \approx n_i$. La necessit\`{a} di approssimare i dati a una Gaussiana e la varianza al numero di conteggi di un bin, \`{e} determinata dal fatto che cos\`{i} facendo il teorema di Gauss-Markov risulta soddisfatto poich\`{e} tra le ipotesi \`{e} necessario che i momenti non dipendano dai parametri. In conclusione si procede a minimizzare il $\chi^2_{Neyman}$ per determinare i parametri $\vec{\theta}$. Gli stimatori $\hat{\theta}$ ottenuti con questo metodo prendono in nome di B.A.N. (Best Asymptotically Normal). Ovvero per $N \rightarrow \infty$ seguono una distribuzioni normale e ha asintoticamente la varianza minima tra possibili stimatori.
 
 \subsubsection{Procedura di fit di un istogramma}
 La procedura di fit di un istogramma con il metodo del $\chi^2$ di Neyman prevede quindi di:
@@ -639,7 +639,7 @@ dove
 \begin{equation*}
 	\mu_i = \dfrac{\mu^N}{N!}e^{\mu} \cdot p_i(\theta) = \dfrac{\mu^N}{N!}e^{\mu} \cdot \int_{w_j} pdf(x,\theta)dx 
 \end{equation*}
-
+Gli stimatori $\hat{\theta}_{ML}$ ottenuti con questo modo godono della propriet\`{a} di essere B.A.N.
 \subsubsection{Osservazioni}
 Ad un bin-size deve essere associata una probabilit\`{a} $p_{i}(\vec{\theta})$ piccola. Non \`{e} necessario che i bin abbiano tutti la stessa dimensione, possiamo sceglierle in modo che $N \cdot p_i$ sia grande e quindi valga l'approssimazione Gaussiana.\newline
 L'operazione di binning, fa perdere informazione, questo si pu\`{o} riflettere sull'incertezza del parametro stimato , ma anche sulla capacit\`{a} di verificare che i dati siano ben descritti dal modello. In questi casi \`{e} utili studiare la dipendenza del risultato dal binning.
@@ -664,7 +664,7 @@ L'operazione di binning, fa perdere informazione, questo si pu\`{o} riflettere s
 	\item Come si può sfruttare questo fatto per determinare la varianza delle misure lungo l'asse y?
 	\item Che cosa sostiene il teorema di Gauss-Markov?
 	\item Come si utilizzano i risultati di un fit per effettuare interpolazioni ed estrapolazioni di un 	andamento y = g(x)?
-	\item Come si può utilizzare il metodo dei minimi quadrati nel caso di misure binnate?
+	\item Come si pu\`{o} utilizzare il metodo dei minimi quadrati nel caso di misure binnate?
 	\item Che caratteristiche hanno gli stimatori ottenuti con questa tecnica?
 	\item Come si può utilizzare il metodo della massima verosimiglianza nel caso di misure binnate?
 	\item Che caratteristiche hanno gli stimatori ottenuti con questa tecnica?
