@@ -36,7 +36,7 @@ Il valore atteso della distribuzione uniforme e la sua varianza sono date da:
 \end{equation}
 \newline
 
-\noindent Per una distribuzione di questo tipo si ha che la simmetria e la kurtosi rispettivamente hanno valore nullo.\newline
+\noindent Per una distribuzione di questo tipo si ha che la simmetria e la curtosi rispettivamente hanno valore nullo.\newline
 Inoltre tale pdf gode della propriet\`{a} di \textbf{riproduttivit\`{a}} ovvero date due variabili casuali x e y che seguono la pdf uniforme si ha che la nuova variabile aleatoria z = x + y segue una distribuzione di probabilit\`{a} pdf(z) con media $\mu_z = \mu_z + \mu_y$ e varianza $\sigma^2_z = \sigma_x^2 + \sigma_y^2$.\newline
 
 Un'altra propriet\`{a} importante della pdf \`{e} data dal fatto che se si ha una variabile aleatoria x che segue una distribuzione uniforme, la variabile casuale y = f(x) seguir\`{a} anch'essa la medesima distribuzione di probabilit\`{a}.\newline
@@ -215,13 +215,12 @@ Inoltre la distribuzione binomiale gode della propriet\`{a} di \textbf{riprodutt
 \subsection{La densit\`{a} di probabilit\'{a} di un'istogramma}
 
 
-
 Consideriamo di avere una variabile aleatoria x di cui effettuiamo N misurazioni, ciascuna misurazione segue una pdf(x). 
 
 \begin{wrapfigure}{l}{0.\textwidth}
 \centering
 
-\includegraphics[scale = 0.33]{binning}	
+\includegraphics[scale = 0.3]{binning}	
 
 \end{wrapfigure}
 
@@ -231,11 +230,8 @@ Consideriamo di avere una variabile aleatoria x di cui effettuiamo N misurazioni
 \includegraphics[width = 1.9in]{Bernouli_Histo}	
 
 \end{wrapfigure}
-\noindent Per farlo si procede a costruire un istogramma e a contare il numero di eventi $k_{i}$ che cadono all'interno di un bin e rappresentare tale numero con una barra. Il numero di misure $k_i$ che cade all'intero di un bin \`{e} una variabile aleatoria.
-
-
+Per farlo si procede a costruire un istogramma e a contare il numero di eventi $k_{i}$ che cadono all'interno di un bin e rappresentare tale numero con una barra. Il numero di misure $k_i$ che cade all'intero di un bin \`{e} una variabile aleatoria.
 Di conseguenza studiando il comportamento di un singolo bin [a,b), il numero di misure $k_{i}$ \`{e} descritto da una distribuzione di probabilit\`{a}, poich\`{e} un fenomeno cade o non cade all'interno dell'intervallo la pdf($k_i$) \`{e} quella di Bernoulli. 
-
 Reiterando l'esperimento sullo stesso bin il numero di successi $k_{i}$ seguir\`{a} una pdf(k) di una binomiale $B(k \vert N,p)$ dove la probabilit\`{a} \`{e} $ p = \int_{a}^{b}{pdf(x)dx}$ sull'intervallo del bin associato.
 
  Un conteggio di misure \`{e} soggetto a fluttuazioni statistiche, e al crescere del numero delle misure l'istogramma assumer\`{a} la distribuzione di probabilit\`{a} pdf(x) della variabile aleatoria X misurata.
@@ -249,9 +245,8 @@ I metodi statisti che possono essere applicati a misure binnate richiedono che i
 \noindent Se la dimensione dei bin \`{e} piccola e la probabilit\`{a} \`{e} sufficientemente piccola allora la covarianza \`{e} pressoch\`{e} nulla. Di conseguenza le variabili $k_i$ sono indipendenti tra loro e dunque ciascuan distribuita come una binomiale.
 \item
 \noindent Se il numero di eventi N \`{e} molto grande e la probabilit\`{a} $p_i$ \`{e} piccola la distribuzione di probabilit\`{a} dei conteggi \`{e} approssimabile a quella di una distribuzione Poissoniana. 
-\section{Distribuzione Multinomiale}
-
 \end{itemize}
+\section{Distribuzione Multinomiale}
 
 Considerando quando discusso nella sezione precedente per ogni singolo bin che si \`{e} costruito nell'istogramma, si definisce una probabilit\`{a} multinomiale:
 
